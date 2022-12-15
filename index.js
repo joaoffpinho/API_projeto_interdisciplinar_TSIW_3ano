@@ -18,7 +18,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {explorer
 
 
 const auth = function(req, res, next) {
-    let exceptions = ['/api-docs']; 
+    let exceptions = ['workers/login','/api-docs']; 
     if(exceptions.indexOf(req.url) >= 0) {
         next(); 
     } else {
