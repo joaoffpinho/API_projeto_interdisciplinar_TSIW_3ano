@@ -5,6 +5,6 @@ const teamSchema = new mongoose.Schema({
     desc: String
 });
 
-const team = mongoose.model('tbl_clients', teamSchema  );
+const team = mongoose.model('tbl_teams', teamSchema  );
 
 module.exports = team;

@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const controller = require('../controllers/clients')
+const controller = require('../controllers/badges')
 const {validationResult, body} = require('express-validator')
 
 router.get('/', ( req, res) => {

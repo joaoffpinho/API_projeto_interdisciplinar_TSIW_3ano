@@ -5,7 +5,10 @@ const workerSchema = new mongoose.Schema({
     admin: Boolean,
     passworod: String,
     email: String,
-    badges: [],
+    badges: [{
+        name: String,
+        rewardPoints: Number
+    }],
     tasksDone: Number,
     hoursWorked: Number,
     projectsInvolved: Number,

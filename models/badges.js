@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 
 const badgeSchema = new mongoose.Schema({
-    client: String, /*id*/
     name: String,
-    manager: String, /*id*/
-    workers: [], /*id's*/
-    tasks: [], /*id & name & worker's id & desc & TimeSpent & date*/
+    image: [],
+    reqAchivement: [], /*number & type(hours. tasks, et cetera)*/
+    rewardPoints: Number,
 });
 
-const badge = mongoose.model('tbl_clients', badgeSchema );
+const badge = mongoose.model('tbl_badges', badgeSchema );
 
-module.exports = badge ;
+module.exports = badge

@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express')
 const mongoose = require('mongoose');
 const app = express();
@@ -18,7 +17,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {explorer
 
 
 const auth = function(req, res, next) {
-    let exceptions = ['workers/login','/api-docs']; 
+    let exceptions = ['/api-docs']; 
     if(exceptions.indexOf(req.url) >= 0) {
         next(); 
     } else {
@@ -33,15 +32,15 @@ const auth = function(req, res, next) {
 }
 
 app.use(express.json());
-app.use(auth); 
+app.use(auth);
 app.use('/workers', workers);
 app.use('/projects', projects);
-app.user('/tasks', tasks);
-app.user('/badges', badges);
-app.user('/teams', teams);
-app.user('/clients', clients);
+app.use('/tasks', tasks);
+app.use('/badges', badges);
+app.use('/teams', teams);
+app.use('/clients', clients);
 
-mongoose.connect('', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb+srv://dbtest:dbtest@cluster0.z5fv5.mongodb.net/test', {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {

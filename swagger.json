@@ -1,0 +1,160 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "DTAM and TSIW API",
+        "description": "DTAM and TSIW API Demo",
+        "version": "1.0"
+    },
+    "produces": ["application/json"],
+    "schemes": ["http"],
+    "components": {
+        "schemas":{
+            "User": {
+                "type": "object",
+                "required": ["username", "password"],
+                "properties": {
+                    "usernam": {
+                        "type": "string"
+                    }, 
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearer": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }, 
+    "paths": {
+        "/login": {
+            "post": {
+                "description": "Login",
+                "tags": ["Users"],
+                "requestBody": {
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "$ref": "#components/schemas/User"
+                            },
+                            "examples": {
+                                "User": {
+                                    "value": {
+                                        "username":"admin", 
+                                        "password": "1234"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Sucess": {
+                                        "value": "Bearer Token"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/register": {
+            "post": {
+                "description": "Register",
+                "tags": ["Users"],
+                "requestBody": {
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "$ref": "#components/schemas/User"
+                            },
+                            "examples": {
+                                "User": {
+                                    "value": {
+                                        "username":"admin", 
+                                        "password": "1234"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "examples": {
+                                "Success": {
+                                    "value": "User Created"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "Duplicated",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Duplicated User"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
