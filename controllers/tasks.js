@@ -59,5 +59,5 @@ const deleteTask = (req, res) => {
 
 exports.getAllUserTasks = getAllUserTasks;
 exports.createTask = createTask;
-exports.updateTask = updateTask;
+// exports.updateTask = updateTask;
 exports.deleteTask = deleteTask;

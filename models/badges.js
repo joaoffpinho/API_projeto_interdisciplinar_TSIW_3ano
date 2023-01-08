@@ -2,14 +2,18 @@ const mongoose = require('mongoose');
 
 const badgeSchema = new mongoose.Schema({
     name: {
-        type: String
+        type: String,
+        required: true
     },
     image: [],
     reqAchivement: [{
-        points: Number,
-        requisits: String, /**/
-    }], /*number & type(hours. tasks, et cetera)*/
-    rewardPoints: Number,
+        reqPoints: Number, /* number */
+        requisits: String, /* type(hours. tasks, et cetera) */
+    }],
+    rewardPoints: {
+        type: Number,
+        required: true
+    },
 });
 
 const badge = mongoose.model('tbl_badges', badgeSchema );

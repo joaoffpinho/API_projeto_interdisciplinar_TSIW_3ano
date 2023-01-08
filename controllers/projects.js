@@ -79,5 +79,5 @@ const deleteProject = (req, res) => {
 exports.getAllProjects = getAllProjects; 
 exports.getOneProject = getOneProject; 
 exports.createProject = createProject;
-exports.updateProject = updateProject;
+// exports.updateProject = updateProject;
 exports.deleteProject = deleteProject;
