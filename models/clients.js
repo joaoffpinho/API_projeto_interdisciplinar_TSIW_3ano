@@ -1,8 +1,15 @@
 const mongoose = require('mongoose');
 
 const clientSchema = new mongoose.Schema({
-    name: String,
-    contact: Number,
+    name: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    contact: {
+        type: Number,
+        unique: true
+    },
 });
 
 const client = mongoose.model('tbl_clients', clientSchema );

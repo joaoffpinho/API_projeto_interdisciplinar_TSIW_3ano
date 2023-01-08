@@ -1,88 +1,80 @@
 const utilities = require('../utilities/utilities')
-const user = require("../models/clients");
+const client = require("../models/clients");
 const bcrypt = require('bcrypt');
 
-const login = (req, res) => {
-
-    user.find({username: req.body.username}, function (err, user) {
-        if (err) {
-            res.status(400).send(err); 
-        }
-
-        if(user.length > 0) {
-
-            bcrypt.compare(req.body.password, user[0].password).then(function(result) {
-                if(result) {
-                    utilities.generateToken({user: req.body.username}, (token) => {
-                        res.status(200).json(token); 
-                    })
-                } else {
-                    res.status(401).send("Not Authorized"); 
-                }
-            });
-
-           
+const getAllClients= (req, res) => {
+    client.find().then((result) => {
+        if(result) {
+            res.status(200).json(result);
         } else {
-            res.status(401).send("Not Authorized"); 
+            res.status(404).send('not found')
         }
-       
+    }).catch((err) => {
+        res.status(400).send('error')
     })
-} 
+}
 
-const register = (req, res) => {
-    bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(req.body.password, salt, function(err, hash) {
-            
-            const userToCreate = new user({ username: req.body.username, password: hash });
+const getOneClient= (req, res) => {
+    client.findById(req.params.id).then((result) => {
+        if (result) {
+            res.status(200).json(result)
+        } else {
+            res.status(404).send('not found')
+        }
+    }).catch((err) => {
+        res.status(400).send('error')
+    })
+}
 
-            user.find({username: req.body.username}, function (err, user) {
-                if (err) {
-                    res.status(400).send(err); 
-                }
-        
-                if(user.length > 0) {
-                    res.status(406).send("Duplicated User"); 
-                } else {
-                    userToCreate.save(function (err, newUser) {
-                        if (err) {
-                            res.status(400).send(err); 
-                        }
-                        res.status(200).json("Registered User"); 
-                    })
-                }
+const createClient = (req, res) => {    
+    client.find({
+        name: req.body.name
+    }).then((result) => {
+        if(result.length > 0) {
+            res.status(406).send('duplicated')
+        } else {
+            const client = new Client ({
+                name: req.body.name,
+                telefone: req.body.telefone,
             })
-        });
-    });
+        
+            client.save().then((result)=>{
+                res.status(200).json(result)
+            }).catch((err)=> {
+                res.status(400).send('error')
+            })
+        }
+    }).catch((error) => {
+        res.status(400).send('error')
+    })
 } 
 
-const editClient = (req, res) => {
+// const updateTeam = (req, res) => {
+//     team.find(req.params.title, req.body).then((result) => {
+//         if (result) {
+//             res.status(200).send(`team id:${req.params.id}: change made successfully`);
+//         }
+//         else {
+//             res.status(404).send('not found')
+//         }
+//     }).catch((error) => {
+//         res.status(400).send(error);
+//     })
+// }
 
-}
-
-const list = (req, res) => {
-    user.find(function (err, users) {
-        if (err) {
-            res.status(400).send(err); 
+const deleteClient= (req, res) => {
+    client.findOneAndDelete({name: req.params.name}).then((result) => {
+        if (result) {
+            res.status(200).send(`client name:${req.params.name} successfully deleted`)
+        } else {
+            res.status(404).send('user not found');
         }
-        res.status(200).json(users); 
+    }).catch((error) => {
+        res.status(400).send(error);
     })
 }
 
-const getClientsByName = (req, res) => {
-    user.find({name: req.params.name}, function (err, users) {
-        if (err) {
-            res.status(400).send(err); 
-        }
-        res.status(200).json(users); 
-    })
-}
-
-const deleteUser = (req, res) => {
-    
-}
-
-exports.login = login; 
-exports.register = register; 
-exports.list = list;
-exports.getClientsByName = getClientsByName;
-exports.deleteUser = deleteUser;
+exports.getAllClients = getAllClients;
+exports.getOneClient = getOneClient;
+exports.createClient = createClient;
+exports.deleteClient = deleteClient;

@@ -1,18 +1,23 @@
 const mongoose = require('mongoose');
 
 const projectSchema = new mongoose.Schema({
-    client: String, /*id*/
-    name: String,
-    manager: String, /*id*/
+    client: {
+        type: String,
+        required: true
+    },
+    name: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    manager: {
+        type: String,
+        required: true
+    },
     workers: [{
-        name: String, /*and id */
-    }],
-    tasks: [{
-        title: String,
-        worker: String,
-        desc: String,
-        TimeSpent: Number,
-    }], /*id & name & worker's id & desc & TimeSpent & date*/
+        name: String,
+        id: String,
+    }]
 });
 
 const project = mongoose.model('tbl_projects', projectSchema  );

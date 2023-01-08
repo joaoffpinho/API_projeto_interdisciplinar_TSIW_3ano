@@ -11,16 +11,16 @@ router.get('/:id', ( req, res) => {
     controller.getOneClient(req,res);
 })
 
-router.post('/', (req, res) => {
+router.post('/:name', (req, res) => {
     controller.createClient(req, res);
 })
 
 /* que infromações são necessarias*/
-router.put('/:id', (req, res) => {
+router.put('/:name', (req, res) => {
     controller.updateClient(req, res)
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:name', (req, res) => {
     controller.deleteClient(req, res)
 })
 

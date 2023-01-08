@@ -9,15 +9,102 @@
     "schemes": ["http"],
     "components": {
         "schemas":{
-            "User": {
+            "Badge": {
                 "type": "object",
-                "required": ["username", "password"],
+                "required": ["name", "image", "reqAchivement", "rewardPoints"],
                 "properties": {
-                    "usernam": {
+                    "name": {
                         "type": "string"
+                    }, 
+                    "image": {
+                        "type": "link"
+                    }, 
+                    "reqAchivement": {
+                        "type": "string"
+                    }, 
+                    "rewardPoints": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "Client": {
+                "type": "object",
+                "required": ["name", "contact"],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }, 
+                    "contact": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Project": {
+                "type": "object",
+                "required": ["client", "name","manager","workers","tasks"],
+                "properties": {
+                    "client": {
+                        "type": "string"
+                    }, 
+                    "name": {
+                        "type": "string"
+                    }, 
+                    "manager": {
+                        "type": "string"
+                    }, 
+                    "workers": {
+                        "type": "array",
+                        "item":{
+                            "type":"string"
+                        }
+                    }, 
+                    "tasks": {
+                        "type": "array"
+                    }
+                }
+            },
+            "Team": {
+                "type": "object",
+                "required": ["workers", "desc"],
+                "properties": {
+                    "workers": {
+                        "type": "array"
+                    }, 
+                    "desc": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Worker": {
+                "type": "object",
+                "required": ["name", "admin","password","email","badges","tasksDone","hoursWorked","projectsInvolved","HoursForTheDay"],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }, 
+                    "admin": {
+                        "type": "boolean"
                     }, 
                     "password": {
                         "type": "string"
+                    }, 
+                    "email": {
+                        "type": "string"
+                    }, 
+                    "badges": {
+                        "type": "array"
+                    }, 
+                    "tasksDone": {
+                        "type": "integer"
+                    }, 
+                    "hoursWorked": {
+                        "type": "integer"
+                    }, 
+                    "projectsInvolved": {
+                        "type": "integer"
+                    }, 
+                    "HoursForTheDay": {
+                        "type": "integer"
                     }
                 }
             }
@@ -31,20 +118,20 @@
         }
     }, 
     "paths": {
-        "/login": {
+        "/workers/login": {
             "post": {
                 "description": "Login",
-                "tags": ["Users"],
+                "tags": ["workers"],
                 "requestBody": {
                     "content": {
                         "application/json" : {
                             "schema": {
-                                "$ref": "#components/schemas/User"
+                                "$ref": "#components/schemas/Worker"
                             },
                             "examples": {
-                                "User": {
+                                "Worker": {
                                     "value": {
-                                        "username":"admin", 
+                                        "name":"admin", 
                                         "password": "1234"
                                     }
                                 }
@@ -86,21 +173,22 @@
                 }
             }
         },
-        "/register": {
+        "/workers/register": {
             "post": {
                 "description": "Register",
-                "tags": ["Users"],
+                "tags": ["workers"],
                 "requestBody": {
                     "content": {
                         "application/json" : {
                             "schema": {
-                                "$ref": "#components/schemas/User"
+                                "$ref": "#components/schemas/Worker"
                             },
                             "examples": {
-                                "User": {
+                                "Worker": {
                                     "value": {
-                                        "username":"admin", 
-                                        "password": "1234"
+                                        "name":"admin", 
+                                        "password": "1234",
+                                        "email": "admin@gmail.com"
                                     }
                                 }
                             }
@@ -118,7 +206,7 @@
                             },
                             "examples": {
                                 "Success": {
-                                    "value": "User Created"
+                                    "value": "Worker Created"
                                 }
                             }
                         }
