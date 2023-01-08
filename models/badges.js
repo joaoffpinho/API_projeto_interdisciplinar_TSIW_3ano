@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
 
 const badgeSchema = new mongoose.Schema({
-    name: String,
+    name: {
+        type: String
+    },
     image: [],
-    reqAchivement: [], /*number & type(hours. tasks, et cetera)*/
+    reqAchivement: [{
+        points: Number,
+        requisits: String, /**/
+    }], /*number & type(hours. tasks, et cetera)*/
     rewardPoints: Number,
 });
 

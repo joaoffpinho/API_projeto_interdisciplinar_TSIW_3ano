@@ -2,10 +2,12 @@ var jwt = require('jsonwebtoken');
 
 let secret = "%)$2sF55Idf(Rm&jyPnkqAL^+8m4dSw)"; 
 
-const generateToken = (user_info, callback) => {
+const generateToken = (information, callback) => {
     let token = jwt.sign({
-        data: user_info,
-    }, secret, {expiresIn: '24h'});
+        data: information,
+    }, 
+    secret, 
+    {expiresIn: '24h'});
     return callback(token); 
 }
 

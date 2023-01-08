@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const workerSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
     },
     admin: {
         type: Boolean,
@@ -14,12 +14,9 @@ const workerSchema = new mongoose.Schema({
         required: true
     },
     email: {
-        type: String
+        type: String,
+        unique: true,
     },
-    badges: [{
-        name: String,
-        rewardPoints: Number
-    }],
     tasksDone: {
         type: Number,
         default: 0
@@ -35,7 +32,11 @@ const workerSchema = new mongoose.Schema({
     HoursForTheDay: {
         type: Number,
         default: 0
-    }
+    },
+    badges: [{
+        name: String,
+        rewardPoints: Number
+    }],
 });
 
 const worker = mongoose.model('tbl_workers', workerSchema);

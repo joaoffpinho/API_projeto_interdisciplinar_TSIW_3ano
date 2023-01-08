@@ -10,6 +10,9 @@ const clientSchema = new mongoose.Schema({
         type: Number,
         unique: true
     },
+    desc: {
+        type: String,
+    }
 });
 
 const client = mongoose.model('tbl_clients', clientSchema );

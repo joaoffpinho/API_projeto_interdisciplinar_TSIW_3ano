@@ -11,7 +11,8 @@ const teamSchema = new mongoose.Schema({
         id: String
     }],
     desc: {
-        String}
+        type: String
+    }
 });
 
 const team = mongoose.model('tbl_teams', teamSchema  );
