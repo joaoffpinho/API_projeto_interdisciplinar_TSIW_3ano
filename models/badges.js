@@ -7,8 +7,8 @@ const badgeSchema = new mongoose.Schema({
     },
     image: [],
     reqAchivement: [{
-        reqPoints: Number, /* number */
-        requisits: String, /* type(hours. tasks, et cetera) */
+        reqPoints: Number, /* quantidade necessaria */
+        requisits: String, /* tasksDone, hoursWorked, projectsInvolved so estes 3 por enquanto */
     }],
     rewardPoints: {
         type: Number,
