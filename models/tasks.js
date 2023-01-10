@@ -5,7 +5,11 @@ const taskSchema = new mongoose.Schema({
             type: String,
             required: true
         },
-        worker: {
+        worker_id: {
+            type: String,
+            required: true
+        },
+        project_id :{
             type: String,
             required: true
         },

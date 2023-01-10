@@ -7,7 +7,6 @@ const teamSchema = new mongoose.Schema({
         unique: true
     },
     workers: [{
-        name: String,
         id: String
     }],
     desc: {

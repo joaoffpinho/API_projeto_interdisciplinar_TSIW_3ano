@@ -3,16 +3,16 @@ const router = express.Router();
 const controller = require('../controllers/badges')
 const {validationResult, body} = require('express-validator')
 
+router.post('/:name', (req, res) => {
+    controller.createClient(req, res);
+})
+
 router.get('/', ( req, res) => {
     controller.getAllClients(req,res);
 })
 
 router.get('/:id', ( req, res) => {
     controller.getOneClient(req,res);
-})
-
-router.post('/:name', (req, res) => {
-    controller.createClient(req, res);
 })
 
 /* que infromações são necessarias*/

@@ -34,8 +34,7 @@ const workerSchema = new mongoose.Schema({
         default: 0
     },
     badges: [{
-        name: String,
-        rewardPoints: Number
+        id: String
     }],
 });
 
