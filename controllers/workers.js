@@ -27,8 +27,38 @@ const login = (req, res) => {
     })
 }
 
+const register = (req, res) => {
+    bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(req.body.password, salt, function(err, hash) {
+            
+            const workerToCreate = new worker({ 
+                name: req.body.name, 
+                email: req.body.email, 
+                password: hash
+            });
+
+            worker.find({name: req.body.name}, function (err, worker) {
+                if (err) {
+                    res.status(400).send(err); 
+                }
+
+                if( worker.length > 0 ) {
+                    res.status(406).send("Duplicated Worker"); 
+                } else {
+                    workerToCreate.save(function (err, newWorker) {
+                        if (err) {
+                            res.status(400).send(err); 
+                        }
+                        res.status(200).json("Registered Worker"); 
+                    })
+                }
+            })
+        });
+    });
+}
+
 const getAllWorkers = (req, res) => {
-    user.find().then((result) => {
+    worker.find().then((result) => {
         if(result) {
             res.status(200).json(result);
         } else {
@@ -75,36 +105,6 @@ const deleteWorker = (req, res) => {
         res.status(400).send(error);
     })
 }
-
-const register = (req, res) => {
-    bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(req.body.password, salt, function(err, hash) {
-            
-            const workerToCreate = new worker({ 
-                name: req.body.name, 
-                email: req.body.email, 
-                password: hash
-            });
-
-            worker.find({name: req.body.name}, function (err, worker) {
-                if (err) {
-                    res.status(400).send(err); 
-                }
-
-                if( worker.length > 0 ) {
-                    res.status(406).send("Duplicated Worker"); 
-                } else {
-                    workerToCreate.save(function (err, newWorker) {
-                        if (err) {
-                            res.status(400).send(err); 
-                        }
-                        res.status(200).json("Registered Worker"); 
-                    })
-                }
-            })
-        });
-    });
-} 
 
 exports.login = login; 
 exports.getAllWorkers = getAllWorkers;

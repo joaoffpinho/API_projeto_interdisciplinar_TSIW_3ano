@@ -6,10 +6,14 @@ const badgeSchema = new mongoose.Schema({
         required: true
     },
     image: [],
-    reqAchivement: [{
-        reqPoints: Number, /* quantidade necessaria */
-        requisits: String, /* tasksDone, hoursWorked, projectsInvolved so estes 3 por enquanto */
-    }],
+    reqPoints: {
+        type: Number,
+        required: true
+    },
+    requisits: {
+        type: String,
+        required: true
+    },
     rewardPoints: {
         type: Number,
         required: true

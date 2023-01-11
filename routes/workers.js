@@ -7,7 +7,12 @@ router.post('/login', (req, res) => {
     controller.login(req, res);
 })
 
-router.get('/all', ( req, res) => {
+//testing
+router.post('/register', (req, res) => {
+    controller.register(req, res);
+})
+
+router.get('/getAll', ( req, res) => {
     controller.getAllWorkers(req,res);
 })
 
@@ -32,9 +37,6 @@ router.delete('/:id', (req, res) => {
 })
 
 
-//testing
-router.post('/register', (req, res) => {
-    controller.register(req, res);
-})
+
 
 module.exports = router
