@@ -1,8 +1,6 @@
-const utilities = require('../utilities/utilities')
 const team = require("../models/teams");
-const bcrypt = require('bcrypt');
 
-const getAllWorkers = (req, res) => {
+const getAllTeams= (req, res) => {
     team.find().then((result) => {
         if(result) {
             res.status(200).json(result);
@@ -14,7 +12,7 @@ const getAllWorkers = (req, res) => {
     })
 }
 
-const getOneWorker= (req, res) => {
+const getOneTeam= (req, res) => {
     team.findById(req.params.id).then((result) => {
         if (result) {
             res.status(200).json(result)
@@ -26,27 +24,29 @@ const getOneWorker= (req, res) => {
     })
 }
 
-const createTeam = (req, res) => {    
-    team.find({
-        title: req.body.title
-    }).then((result) => {
-        if(result.length > 0) {
-            res.status(406).send('duplicated')
+const createTeam = (req, res) => {
+    const teamToCreate = new team ({
+        title: req.body.title,
+        manager_id: req.body.manager_id,
+        workers: [req.body.workers],
+        desc: req.body.desc,
+    })
+    
+    team.find({ title: req.body.title }, function (err, team) {
+        if (err) {
+            res.status(400).send(err); 
+        }
+
+        if( team.length > 0 ) {
+            res.status(406).send("Duplicated Worker"); 
         } else {
-            const team = new Team ({
-                title: req.body.title,
-                workers: [req.body.workers],
-                desc: req.body.desc,
-            })
-        
-            team.save().then((result)=>{
-                res.status(200).json(result)
-            }).catch((err)=> {
-                res.status(400).send('error')
+            teamToCreate.save(function (err, newTeam) {
+                if (err) {
+                    res.status(400).send(err); 
+                }
+                res.status(200).json("Registered Team"); 
             })
         }
-    }).catch((error) => {
-        res.status(400).send('error')
     })
 } 
 
@@ -75,7 +75,7 @@ const deleteTeam = (req, res) => {
     })
 }
 
-exports.getAllWorkers = getAllWorkers;
-exports.getOneWorker = getOneWorker;
+exports.getAllTeams = getAllTeams;
+exports.getOneTeam = getOneTeam;
 exports.createTeam = createTeam;
 exports.deleteTeam = deleteTeam;

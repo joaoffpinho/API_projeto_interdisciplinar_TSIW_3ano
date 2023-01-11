@@ -6,6 +6,10 @@ const teamSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    manager_id:{
+        type: String,
+        required: true
+    },
     workers: [{
         id: String
     }],

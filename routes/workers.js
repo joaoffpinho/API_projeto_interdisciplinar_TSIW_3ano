@@ -5,20 +5,20 @@ const {validationResult, body} = require('express-validator')
 
 router.post('/login', (req, res) => {
     controller.login(req, res);
-})
+})//done
 
 //testing
 router.post('/register', (req, res) => {
     controller.register(req, res);
-})
+})//done
 
 router.get('/getAll', ( req, res) => {
     controller.getAllWorkers(req,res);
-})
+})//done
 
 router.get('/:id', ( req, res) => {
     controller.getOneWorker(req,res);
-})
+})//done
 
 router.put('/:id/update', (req, res) => {
     controller.updateWorker(req, res)

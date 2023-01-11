@@ -92,11 +92,14 @@
             },
             "Team": {
                 "type": "object",
-                "required": ["title"],
+                "required": ["title", "manager_id"],
                 "properties": {
                     "title": {
                         "type": "string"
                     }, 
+                    "manager_id": {
+                        "type": "string"
+                    },
                     "desc": {
                         "type": "string"
                     },
@@ -398,7 +401,7 @@
                 }]
             }
         },
-        "/workers/{:id}": {
+        "/workers/{id}": {
             "get": {
                 "description": "Get one Worker",
                 "tags": ["workers"],
@@ -409,14 +412,9 @@
                       "description": "ID of worker to use",
                       "required": true,
                       "schema": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "style": "simple"
-                    }
-                  ],
+                        "type": "string"
+                      }
+                    }],
                 "responses": {
                     "200": {
                         "description": "Worker info",
@@ -496,9 +494,282 @@
                 "security": [{
                     "bearer": []
                 }]
+            },
+            "delete": {
+                "description": "delete one Worker",
+                "tags": ["workers"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of worker",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "responses": {
+                    "200": {
+                        "description": "Worker deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Worker"
+                                },
+                                "examples": {
+                                    "Worker": "Worker deleted"
+                                }
+                            },
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            }
+        },
+        "/workers/{id}/update": {
+            "put": {
+                "description": "Put one Worker",
+                "tags": ["workers"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of worker to use",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "requestBody": {
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "$ref": "#components/schemas/Worker"
+                            },
+                            "examples": {
+                                "Worker": {
+                                    "value": {
+                                        "name":"john"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Worker update",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Worker"
+                                },
+                                "examples": {
+                                    "Worker changes": 
+                                        {
+                                            "name": "user",
+                                            "password": "5rftft67gyh8j",
+                                            "email": "user@gmail.com"
+                                        }
+                                }
+                            },
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            }
+        },
+        "/teams/create": {
+            "post": {
+                "description": "Create Team",
+                "tags": ["team"],
+                "requestBody": {
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "$ref": "#components/schemas/Team"
+                            },
+                            "examples": {
+                                "Team": {
+                                    "value": {
+                                        "title":"Grupo1",
+                                        "manager_id": ":id"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "examples": {
+                                "Success": {
+                                    "value": "Team Created"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized ^^"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "Duplicated",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Duplicated User"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
             }
         }
-
-
     }
 }

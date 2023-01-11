@@ -13,7 +13,7 @@ const login = (req, res) => {
         if(worker.length > 0) {
             bcrypt.compare(req.body.password, worker[0].password).then(function(result) {
                 if(result) {
-                    utilities.generateToken({worker: req.body.name, _id: req.body._id}, (token) => {
+                    utilities.generateToken({worker: req.body.name, _id: req.body._id, admin: req.body.admin}, (token) => {
                         res.status(200).json(token);
                     })
                 } else {
