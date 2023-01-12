@@ -50,18 +50,18 @@ const createTeam = (req, res) => {
     })
 } 
 
-// const updateTeam = (req, res) => {
-//     team.find(req.params.title, req.body).then((result) => {
-//         if (result) {
-//             res.status(200).send(`team id:${req.params.id}: change made successfully`);
-//         }
-//         else {
-//             res.status(404).send('not found')
-//         }
-//     }).catch((error) => {
-//         res.status(400).send(error);
-//     })
-// }
+const updateTeam = (req, res) => {
+    team.findByIdAndUpdate(req.params.id, req.body).then((result) => {
+        if (result) {
+            res.status(200).send(`team id:${req.params.id}: change made successfully`);
+        }
+        else {
+            res.status(404).send('not found')
+        }
+    }).catch((error) => {
+        res.status(400).send(error);
+    })
+}
 
 const deleteTeam = (req, res) => {
     team.findOneAndDelete({title: req.params.title}).then((result) => {
@@ -79,3 +79,4 @@ exports.getAllTeams = getAllTeams;
 exports.getOneTeam = getOneTeam;
 exports.createTeam = createTeam;
 exports.deleteTeam = deleteTeam;
+exports.updateTeam = updateTeam;

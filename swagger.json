@@ -512,17 +512,12 @@
                     "200": {
                         "description": "Worker deleted",
                         "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#components/schemas/Worker"
-                                },
-                                "examples": {
-                                    "Worker": "Worker deleted"
-                                }
-                            },
                             "text/plain": {
                                 "schema": {
                                     "type": "string"
+                                },
+                                "examples": {
+                                    "value": "Team deleted"
                                 }
                             }
                         }
@@ -760,6 +755,371 @@
                                 "examples": {
                                     "Error": {
                                         "value": "Duplicated User"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            }
+        },
+        "/teams/all": {
+            "get": {
+                "description": "get all Team",
+                "tags": ["team"],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Team"
+                                }
+                            },
+                            "examples": {
+                                "Team List": [
+                                    {
+                                        "_id": "5fac346470a04c174c2e121f",
+                                        "title": "Grupo1",
+                                        "manager_id": "63b96a15adfdee5320021052",
+                                        "workers": [{
+                                            "id": "63b96a15adfdee55467892"
+                                        },{
+                                            "id": "63b96a15adfdee55467892"
+                                        }],
+                                        "desc": "testing"
+                                    },
+                                    {
+                                        "_id": "5fac346470a04c174c2e121f",
+                                        "title": "Grupo1",
+                                        "manager_id": "63b96a15adfdji35320021052",
+                                        "workers": [{
+                                            "id": "6ihvu3nofdee55467892"
+                                        },{
+                                            "id": "63b96a1512n1no55467892"
+                                        }],
+                                        "desc": "testing"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized ^^"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "Duplicated",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Duplicated User"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            }
+        },
+        "/teams/{id}": {
+            "get": {
+                "description": "Get one Team",
+                "tags": ["team"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of team to use",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "responses": {
+                    "200": {
+                        "description": "Team info",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Team"
+                                },
+                                "examples": {
+                                    "Team List": 
+                                        {
+                                            "_id": "5fac346470a04c174c2e121f",
+                                            "title": "Grupo1",
+                                            "manager_id": "63b96a15adfdee5320021052",
+                                            "workers": [{
+                                                "id": "63b96a15adfdee55467892"
+                                            },{
+                                                "id": "63b96a15adfdee55467892"
+                                            }],
+                                            "desc": "testing"
+                                        }
+                                }
+                            },
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            },
+            "delete": {
+                "description": "delete one Team",
+                "tags": ["team"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of the Team",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "responses": {
+                    "200": {
+                        "description": "Team deleted",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "value": "Team deleted"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            },
+            "put": {
+                "description": "update one Team",
+                "tags": ["team"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of worker to use",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "requestBody": {
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "$ref": "#components/schemas/Team"
+                            },
+                            "examples": {
+                                "Worker": {
+                                    "value": {
+                                        "title":"grupo1"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Team update",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Team"
+                                },
+                                "examples": {
+                                    "Team changes": 
+                                        {
+                                            "title": "grupo3"
+                                        }
+                                }
+                            },
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
                                     }
                                 }
                             }
