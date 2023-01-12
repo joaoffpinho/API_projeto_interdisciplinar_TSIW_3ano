@@ -15,9 +15,9 @@ router.put('/:id', (req, res) => {
     controller.updateTask(req, res)
 }) 
 
-// router.put('/:id/workers/:id', (req, res) => {
-//     controller.updateTaskTime(req, res)
-// })
+router.put('/:id', (req, res) => {
+    controller.updateTask(req, res)
+})
 
 router.delete('/:id', (req, res) => {
     controller.deleteTask(req, res)
