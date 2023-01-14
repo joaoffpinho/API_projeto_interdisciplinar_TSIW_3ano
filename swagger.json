@@ -176,7 +176,7 @@
                             "examples": {
                                 "Worker": {
                                     "value": {
-                                        "name":"admin", 
+                                        "email":"admin@gmail.com", 
                                         "password": "1234"
                                     }
                                 }
@@ -1058,6 +1058,109 @@
                                 "Worker": {
                                     "value": {
                                         "title":"grupo1"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Team update",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Team"
+                                },
+                                "examples": {
+                                    "Team changes": 
+                                        {
+                                            "title": "grupo3"
+                                        }
+                                }
+                            },
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            }
+        },
+        "/teams/{id}/addWorker": {
+            "put": {
+                "description": "add one worker to Team",
+                "tags": ["team"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of team to use",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "requestBody": {
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "$ref": "#components/schemas/Team"
+                            },
+                            "examples": {
+                                "Worker": {
+                                    "value": {
+                                        "worker_id":"78t2gyu9013"
                                     }
                                 }
                             }

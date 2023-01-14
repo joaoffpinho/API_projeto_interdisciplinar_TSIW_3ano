@@ -18,6 +18,10 @@ router.put('/:id', (req, res) => {
     controller.updateTeam(req, res)
 })
 
+router.put('/:id/addWorker', (req, res) => {
+    controller.addWorker(req, res)
+})
+
 router.delete('/:id', (req, res) => {
     controller.deleteTeam(req, res)
 })

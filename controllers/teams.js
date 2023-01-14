@@ -47,7 +47,38 @@ const createTeam = (req, res) => {
             })
         }
     })
-} 
+}
+
+const addWorker = (req, res) => {
+    team.findById(req.params.id, req.body).then((result) => {
+        
+        let workerFound = false;
+        result.workers.forEach(worker => {
+            if (worker.worker_id === req.body.worker_id){
+                workerFound = true
+            }
+        })
+
+        if (workerFound){
+            return res.status(400).json({ message: "Already in the team."});
+        } else {
+                team.findByIdAndUpdate(req.params.id,
+                    { $push:
+                        { workers: {
+                            worker_id: req.body.worker_id
+                    }}
+                    },
+                    { new: true, useFindAndModify: false })
+                    
+                res.status(201).json({ success: true, msg: "New worker added team."});
+        }
+        
+        
+
+    }).catch((error) => {
+        res.status(400).send(error);
+    })
+}; 
 
 const updateTeam = (req, res) => {
     team.findByIdAndUpdate(req.params.id, req.body).then((result) => {
@@ -75,6 +106,7 @@ const deleteTeam = (req, res) => {
 }
 
 exports.getAllTeams = getAllTeams;
+exports.addWorker = addWorker;
 exports.getOneTeam = getOneTeam;
 exports.createTeam = createTeam;
 exports.deleteTeam = deleteTeam;
