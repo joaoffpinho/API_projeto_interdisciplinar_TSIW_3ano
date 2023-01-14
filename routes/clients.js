@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router();
-const controller = require('../controllers/badges')
+const controller = require('../controllers/clients')
 const {validationResult, body} = require('express-validator')
 
-router.post('/:name', (req, res) => {
+router.post('/', (req, res) => {
     controller.createClient(req, res);
 })
 
@@ -15,12 +15,11 @@ router.get('/:id', ( req, res) => {
     controller.getOneClient(req,res);
 })
 
-/* que infromações são necessarias*/
-router.put('/:name', (req, res) => {
+router.put('/:id', (req, res) => {
     controller.updateClient(req, res)
 })
 
-router.delete('/:name', (req, res) => {
+router.delete('/:id', (req, res) => {
     controller.deleteClient(req, res)
 })
 

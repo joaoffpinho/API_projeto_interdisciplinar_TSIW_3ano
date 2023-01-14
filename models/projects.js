@@ -6,17 +6,20 @@ const projectSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    client: {
+    client_id: {
         type: String,
         required: true
     },
-    manager: {
+    manager_id: {
         type: String,
         required: true
     },
     workers: [{
-        id: String,
-    }]
+        worker_id: String,
+    }],
+    desc: {
+        type: String
+    }
 });
 
 const project = mongoose.model('tbl_projects', projectSchema  );

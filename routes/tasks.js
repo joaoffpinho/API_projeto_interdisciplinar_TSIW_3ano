@@ -11,13 +11,13 @@ router.post('/', (req, res) => {
     controller.createTask(req, res);
 })
 
-router.put('/:id', (req, res) => {
-    controller.updateTask(req, res)
-}) 
+router.get('/:id', ( req, res) => {
+    controller.getOneTask(req,res);
+})
 
 router.put('/:id', (req, res) => {
     controller.updateTask(req, res)
-})
+}) 
 
 router.delete('/:id', (req, res) => {
     controller.deleteTask(req, res)

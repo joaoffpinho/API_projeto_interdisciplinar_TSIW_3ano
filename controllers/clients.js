@@ -26,48 +26,50 @@ const getOneClient= (req, res) => {
     })
 }
 
-const createClient = (req, res) => {    
-    client.find({
-        name: req.body.name
-    }).then((result) => {
-        if(result.length > 0) {
-            res.status(406).send('duplicated')
+const createClient = (req, res) => {   
+    const clientToCreate = new client ({
+        name: req.body.name,
+        contact: req.body.contact,
+        desc: req.body.desc
+    })
+    
+    client.find({name: req.body.name}, function (err, client) {
+        if (err) {
+            res.status(400).send(err); 
+        }
+
+        if( client.length > 0 ) {
+            res.status(406).send("Duplicated Client"); 
         } else {
-            const client = new Client ({
-                name: req.body.name,
-                telefone: req.body.telefone,
-            })
-        
-            client.save().then((result)=>{
-                res.status(200).json(result)
-            }).catch((err)=> {
-                res.status(400).send('error')
+            clientToCreate.save(function (err, newTeam) {
+                if (err) {
+                    res.status(400).send(err); 
+                }
+                res.status(200).json("Registered Team"); 
             })
         }
-    }).catch((error) => {
-        res.status(400).send('error')
     })
-} 
+}
 
-// const updateTeam = (req, res) => {
-//     team.find(req.params.title, req.body).then((result) => {
-//         if (result) {
-//             res.status(200).send(`team id:${req.params.id}: change made successfully`);
-//         }
-//         else {
-//             res.status(404).send('not found')
-//         }
-//     }).catch((error) => {
-//         res.status(400).send(error);
-//     })
-// }
+const updateClient= (req, res) => {
+    client.findByIdAndUpdate(req.params.id, req.body).then((result) => {
+        if (result) {
+            res.status(200).send(`client id:${req.params.id}: change made successfully`);
+        }
+        else {
+            res.status(404).send('not found')
+        }
+    }).catch((error) => {
+        res.status(400).send(error);
+    })
+}
 
 const deleteClient= (req, res) => {
-    client.findOneAndDelete({name: req.params.name}).then((result) => {
+    client.findByIdAndDelete(req.params.id).then((result) => {
         if (result) {
-            res.status(200).send(`client name:${req.params.name} successfully deleted`)
+            res.status(200).send(`client name:${req.params.id} successfully deleted`)
         } else {
-            res.status(404).send('user not found');
+            res.status(404).send('client not found');
         }
     }).catch((error) => {
         res.status(400).send(error);
@@ -77,4 +79,5 @@ const deleteClient= (req, res) => {
 exports.getAllClients = getAllClients;
 exports.getOneClient = getOneClient;
 exports.createClient = createClient;
+exports.updateClient = updateClient;
 exports.deleteClient = deleteClient;

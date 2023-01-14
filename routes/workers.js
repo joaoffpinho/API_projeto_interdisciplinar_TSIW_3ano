@@ -24,6 +24,10 @@ router.put('/:id/update', (req, res) => {
     controller.updateWorker(req, res)
 })
 
+router.delete('/:id', (req, res) => {
+    controller.deleteWorker(req, res)
+})
+
 // router.post('/:id/badges/:id', (req, res) => {
 //     controller.giveBadge(req, res)
 // })
@@ -32,9 +36,7 @@ router.put('/:id/update', (req, res) => {
 //     controller.recoverPassword(req, res)
 // })
 
-router.delete('/:id', (req, res) => {
-    controller.deleteWorker(req, res)
-})
+
 
 
 

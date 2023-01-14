@@ -7,7 +7,7 @@ router.get('/', ( req, res) => {
     controller.getAllProjects(req,res);
 })
 
-router.get('/:name', ( req, res) => {
+router.get('/:id', ( req, res) => {
     controller.getOneProject(req,res);
 })
 
@@ -15,13 +15,12 @@ router.post('/', (req, res) => {
     controller.createProject(req, res);
 })
 
-/* que infromações são necessarias*/
-router.put('/:name', (req, res) => {
+router.put('/:id', (req, res) => {
     controller.updateProject(req, res)
 })
 
-router.delete('/:name', (req, res) => {
-    controller.deleteWorker(req, res)
+router.delete('/:id', (req, res) => {
+    controller.deleteProject(req, res)
 })
 
 module.exports = router

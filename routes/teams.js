@@ -14,7 +14,6 @@ router.get('/:id', ( req, res) => {
     controller.getOneTeam(req,res);
 })
 
-/* que infromações são necessarias*/
 router.put('/:id', (req, res) => {
     controller.updateTeam(req, res)
 })

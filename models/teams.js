@@ -11,7 +11,7 @@ const teamSchema = new mongoose.Schema({
         required: true
     },
     workers: [{
-        id: String
+        worker_id: String
     }],
     desc: {
         type: String

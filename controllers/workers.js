@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 
 const login = (req, res) => {
 
-    worker.find({name: req.body.name}, function (err, worker) {
+    worker.find({email: req.body.email}, function (err, worker) {
         if (err) {
             res.status(400).send(err); 
         }
@@ -37,7 +37,7 @@ const register = (req, res) => {
                 password: hash
             });
 
-            worker.find({name: req.body.name}, function (err, worker) {
+            worker.find({email: req.body.email}, function (err, worker) {
                 if (err) {
                     res.status(400).send(err); 
                 }
@@ -84,7 +84,7 @@ const getOneWorker= (req, res) => {
 const updateWorker = (req, res) => {
     worker.findByIdAndUpdate(req.params.id, req.body).then((result) => {
         if (result) {
-            res.status(200).send(`user id:${req.params.id}: change made successfully`);
+            res.status(200).send(`Worker id: ${req.params.id} change made successfully`);
         }
         else {
             res.status(404).send('not found')
@@ -97,7 +97,7 @@ const updateWorker = (req, res) => {
 const deleteWorker = (req, res) => {
     worker.findByIdAndDelete(req.params.id).then((result) => {
         if (result) {
-            res.status(200).send(`user id:${req.params.id} successfully deleted`)
+            res.status(200).send(`worker id:${req.params.id} successfully deleted`)
         } else {
             res.status(404).send('user not found');
         }

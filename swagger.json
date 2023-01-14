@@ -507,7 +507,8 @@
                       "schema": {
                         "type": "string"
                       }
-                    }],
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Worker deleted",
@@ -517,7 +518,9 @@
                                     "type": "string"
                                 },
                                 "examples": {
-                                    "value": "Team deleted"
+                                    "Success": {
+                                        "value": "Worker deleted"
+                                    }
                                 }
                             }
                         }
@@ -975,7 +978,9 @@
                                     "type": "string"
                                 },
                                 "examples": {
-                                    "value": "Team deleted"
+                                    "Success": {
+                                        "value": "Team deleted"
+                                    }
                                 }
                             }
                         }
@@ -1403,7 +1408,9 @@
                                     "type": "string"
                                 },
                                 "examples": {
-                                    "value": "c deleted"
+                                    "Success": {
+                                        "value": "Task deleted"
+                                    }
                                 }
                             }
                         }
@@ -1505,6 +1512,1197 @@
                             "text/plain": {
                                 "schema": {
                                     "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            }
+        },
+
+        "/projects": {
+            "post": {
+                "description": "Create project",
+                "tags": ["project"],
+                "requestBody": {
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "$ref": "#components/schemas/Project"
+                            },
+                            "examples": {
+                                "Project": {
+                                    "value": {
+                                        "name":"projeto 1",
+                                        "client_id": ":id",
+                                        "manager_id": ":id"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "examples": {
+                                "Success": {
+                                    "value": "Project Created"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized ^^"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "Duplicated",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Duplicated Task"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            },
+            "get": {
+                "description": "get all Projects",
+                "tags": ["project"],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Project"
+                                }
+                            },
+                            "examples": {
+                                "Task List": [
+                                    {
+                                        "_id": "5fac346470a04c174c2e121f",
+                                        "name": "projeto 1",
+                                        "client_id": "63b96a15adfdee5320021052",
+                                        "manager_id": "63b96a15adfdee53234052",
+                                        "workers": [{
+                                            "id":"63b96a1512n1no55467892",
+                                            "id":"63b96a15adfdee55467892"
+                                        }]
+                                    },
+                                    {
+                                        "_id": "5fac346470a04c174c2e121f",
+                                        "name": "projeto 1",
+                                        "client_id": "63b96a15adfdee5320021052",
+                                        "manager_id": "63b96a15adfdee53234052",
+                                        "workers": [{
+                                            "id":"63b96a1512n1no55467892",
+                                            "id":"63b96a15adfdee55467892"
+                                        }]
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized ^^"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            }
+        },
+        "/projects/{id}": {
+            "get": {
+                "description": "Get one project",
+                "tags": ["project"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of task to use",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "responses": {
+                    "200": {
+                        "description": "Project info",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Project"
+                                },
+                                "examples": {
+                                    "Project List": 
+                                        {
+                                            "_id": "5fac346470a04c174c2e121f",
+                                            "title": "tarefa 1",
+                                            "worker_id": "63b96a15adfdee5320021052",
+                                            "project_id": "random",
+                                            "desc": "testing"
+                                        }
+                                }
+                            },
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            },
+            "delete": {
+                "description": "delete one Project",
+                "tags": ["project"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of the Project",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "responses": {
+                    "200": {
+                        "description": "Project deleted",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Success": {
+                                        "value": "Project Deleted"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            },
+            "put": {
+                "description": "update one Task",
+                "tags": ["project"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of project to use",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "requestBody": {
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "$ref": "#components/schemas/Project"
+                            },
+                            "examples": {
+                                "Worker": {
+                                    "value": {
+                                        "title":"projeto 2"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Task update",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Project"
+                                },
+                                "examples": {
+                                    "Task changes": 
+                                        {
+                                            "title": "projeto 2"
+                                        }
+                                }
+                            },
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            }
+        },
+
+        "/clients": {
+            "post": {
+                "description": "Create cliente",
+                "tags": ["client"],
+                "requestBody": {
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "$ref": "#components/schemas/Client"
+                            },
+                            "examples": {
+                                "Project": {
+                                    "value": {
+                                        "name":"cliente  1",
+                                        "contact": "987654321",
+                                        "desc": "testing"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "examples": {
+                                "Success": {
+                                    "value": "Project Created"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized ^^"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "Duplicated",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Duplicated Task"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            },
+            "get": {
+                "description": "get all Clients",
+                "tags": ["client"],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Client"
+                                }
+                            },
+                            "examples": {
+                                "Client List": [
+                                    {
+                                        "_id": "5fac346470a04c174c2e121f",
+                                        "name": "cliente 1",
+                                        "contact": "789456123",
+                                        "desc": "testing"
+                                    },
+                                    {
+                                        "_id": "5fac346470a04c174c2e121f",
+                                        "name": "cliente 2",
+                                        "contact": "987654123",
+                                        "desc": "testing"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized ^^"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            }
+        },
+        "/clients/{id}": {
+            "get": {
+                "description": "Get one Client",
+                "tags": ["client"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of Client to use",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "responses": {
+                    "200": {
+                        "description": "Client info",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Client"
+                                },
+                                "examples": {
+                                    "Client List": 
+                                        {
+                                            "_id": "5fac346470a04c174c2e121f",
+                                            "name": "cliente 1",
+                                            "contact": "789456123",
+                                            "desc": "testing"
+                                        }
+                                }
+                            },
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            },
+            "delete": {
+                "description": "delete one Client",
+                "tags": ["client"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of the Client",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "responses": {
+                    "200": {
+                        "description": "Client deleted",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Success": {
+                                        "value": "Client deleted"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            },
+            "put": {
+                "description": "update one client",
+                "tags": ["client"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of client to use",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "requestBody": {
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "$ref": "#components/schemas/Client"
+                            },
+                            "examples": {
+                                "Worker": {
+                                    "value": {
+                                        "title":"client 2"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Client update",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Client"
+                                },
+                                "examples": {
+                                    "Client changes": 
+                                        {
+                                            "name": "cliente 2"
+                                        }
+                                }
+                            },
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            }
+        },
+
+        "/badges": {
+            "get": {
+                "description": "get all badges",
+                "tags": ["badge"],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Badge"
+                                }
+                            },
+                            "examples": {
+                                "Badge List": [
+                                    {
+                                        "_id": "5fac346470a04c174c2e121f",
+                                        "name": "badge 1",
+                                        "image": "url",
+                                        "reqPoints": 10,
+                                        "requisits": "hour",
+                                        "rewardPoints": 10
+                                    },
+                                    {
+                                        "_id": "5fac346470a04c174c2e121f",
+                                        "name": "badge 1",
+                                        "image": "url",
+                                        "reqPoints": 10,
+                                        "requisits": "task",
+                                        "rewardPoints": 10
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized ^^"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            },
+            "post": {
+                "description": "Create Badge",
+                "tags": ["badge"],
+                "requestBody": {
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "$ref": "#components/schemas/Badge"
+                            },
+                            "examples": {
+                                "Team": {
+                                    "value": {
+                                        "name":"badge1",
+                                        "image": "URL/2",
+                                        "reqPoints": 10,
+                                        "requisits": "hours",
+                                        "rewardPoints": 10
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "examples": {
+                                "Success": {
+                                    "value": "Badge Created"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized ^^"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "Duplicated",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Duplicated Badge"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            }
+        },
+        "/badges/{id}": {
+            "get": {
+                "description": "Get one Badge",
+                "tags": ["badge"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of Badge to use",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "responses": {
+                    "200": {
+                        "description": "Badge info",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Badge"
+                                },
+                                "examples": {
+                                    "Badge List": 
+                                    {
+                                        "_id": "5fac346470a04c174c2e121f",
+                                        "name": "badge 1",
+                                        "image": "url",
+                                        "reqPoints": 10,
+                                        "requisits": "hour",
+                                        "rewardPoints": 10
+                                    }
+                                }
+                            },
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            },
+            "delete": {
+                "description": "delete one Badge",
+                "tags": ["badge"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of the Badge",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "responses": {
+                    "200": {
+                        "description": "Badge deleted",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Success": {
+                                        "value": "Badge deleted"
+                                    }
                                 }
                             }
                         }

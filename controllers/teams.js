@@ -28,8 +28,7 @@ const createTeam = (req, res) => {
     const teamToCreate = new team ({
         title: req.body.title,
         manager_id: req.body.manager_id,
-        workers: [req.body.workers],
-        desc: req.body.desc,
+        desc: req.body.desc
     })
     
     team.find({ title: req.body.title }, function (err, team) {
@@ -38,7 +37,7 @@ const createTeam = (req, res) => {
         }
 
         if( team.length > 0 ) {
-            res.status(406).send("Duplicated Worker"); 
+            res.status(406).send("Duplicated Team"); 
         } else {
             teamToCreate.save(function (err, newTeam) {
                 if (err) {
@@ -56,7 +55,7 @@ const updateTeam = (req, res) => {
             res.status(200).send(`team id:${req.params.id}: change made successfully`);
         }
         else {
-            res.status(404).send('not found')
+            res.status(404).send('team not found')
         }
     }).catch((error) => {
         res.status(400).send(error);
@@ -64,11 +63,11 @@ const updateTeam = (req, res) => {
 }
 
 const deleteTeam = (req, res) => {
-    team.findOneAndDelete({title: req.params.title}).then((result) => {
+    team.findByIdAndDelete(req.params.id).then((result) => {
         if (result) {
-            res.status(200).send(`team title:${req.params.title} successfully deleted`)
+            res.status(200).send(`team title:${req.params.id} successfully deleted`)
         } else {
-            res.status(404).send('user not found');
+            res.status(404).send('team not found');
         }
     }).catch((error) => {
         res.status(400).send(error);
