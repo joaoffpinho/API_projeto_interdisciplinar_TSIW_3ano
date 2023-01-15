@@ -381,7 +381,7 @@
                         }
                     },
                     "404": {
-                        "description": "Error",
+                        "description": "Not found",
                         "content": {
                             "text/plain": {
                                 "schema": {
@@ -476,7 +476,7 @@
                         }
                     },
                     "404": {
-                        "description": "Error",
+                        "description": "Not found",
                         "content": {
                             "text/plain": {
                                 "schema": {
@@ -496,7 +496,7 @@
                 }]
             },
             "delete": {
-                "description": "delete one Worker",
+                "description": "Delete one worker",
                 "tags": ["workers"],
                 "parameters": [
                     {
@@ -556,7 +556,7 @@
                         }
                     },
                     "404": {
-                        "description": "Error",
+                        "description": "Not found",
                         "content": {
                             "text/plain": {
                                 "schema": {
@@ -578,7 +578,7 @@
         },
         "/workers/{id}/update": {
             "put": {
-                "description": "Put one Worker",
+                "description": "Update one Worker",
                 "tags": ["workers"],
                 "parameters": [
                     {
@@ -608,19 +608,18 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Worker update",
+                        "description": "Worker updated",
                         "content": {
                             "application/json": {
-                                "schema": {
-                                    "$ref": "#components/schemas/Worker"
-                                },
-                                "examples": {
-                                    "Worker changes": 
-                                        {
-                                            "name": "user",
-                                            "password": "5rftft67gyh8j",
-                                            "email": "user@gmail.com"
+                                "text/plain": {
+                                    "schema": {
+                                        "type": "string"
+                                    },
+                                    "examples": {
+                                        "Success": {
+                                            "value": "Worker updated"
                                         }
+                                    }
                                 }
                             },
                             "text/plain": {
@@ -661,7 +660,7 @@
                         }
                     },
                     "404": {
-                        "description": "Error",
+                        "description": "Not found",
                         "content": {
                             "text/plain": {
                                 "schema": {
@@ -683,13 +682,13 @@
         },
         "/workers/{id}/addBadge": {
             "put": {
-                "description": "add one badge to worker",
+                "description": "Add one badge to worker",
                 "tags": ["workers"],
                 "parameters": [
                     {
                       "name": "id",
                       "in": "path",
-                      "description": "ID of project to use",
+                      "description": "ID of badge to use",
                       "required": true,
                       "schema": {
                         "type": "string"
@@ -699,7 +698,7 @@
                     "content": {
                         "application/json" : {
                             "schema": {
-                                "$ref": "#components/schemas/Project"
+                                "$ref": "#components/schemas/Worker"
                             },
                             "examples": {
                                 "Badge": {
@@ -713,17 +712,18 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Project update",
+                        "description": "Worker updated",
                         "content": {
                             "application/json": {
-                                "schema": {
-                                    "$ref": "#components/schemas/Project"
-                                },
-                                "examples": {
-                                    "Worker added": 
-                                        {
-                                            "title": "grupo3"
+                                "text/plain": {
+                                    "schema": {
+                                        "type": "string"
+                                    },
+                                    "examples": {
+                                        "Success": {
+                                            "value": "Worker updated"
                                         }
+                                    }
                                 }
                             },
                             "text/plain": {
@@ -813,11 +813,11 @@
                             "text/plain": {
                                 "schema": {
                                     "type": "string"
-                                }
-                            },
-                            "examples": {
-                                "Success": {
-                                    "value": "Team Created"
+                                },
+                                "examples": {
+                                    "Success": {
+                                        "value": "Team deleted"
+                                    }
                                 }
                             }
                         }
@@ -846,14 +846,14 @@
                                 },
                                 "examples": {
                                     "Unauthorized": {
-                                        "value": "Not Authorized ^^"
+                                        "value": "Not Authorized"
                                     }
                                 }
                             }
                         }
                     },
                     "406": {
-                        "description": "Duplicated",
+                        "description": "Duplicated Team",
                         "content": {
                             "text/plain": {
                                 "schema": {
@@ -861,7 +861,7 @@
                                 },
                                 "examples": {
                                     "Error": {
-                                        "value": "Duplicated User"
+                                        "value": "Duplicated Team"
                                     }
                                 }
                             }
@@ -875,7 +875,7 @@
         },
         "/teams/all": {
             "get": {
-                "description": "get all Team",
+                "description": "Get all Teams",
                 "tags": ["team"],
                 "responses": {
                     "200": {
@@ -938,14 +938,14 @@
                                 },
                                 "examples": {
                                     "Unauthorized": {
-                                        "value": "Not Authorized ^^"
+                                        "value": "Not Authorized"
                                     }
                                 }
                             }
                         }
                     },
                     "406": {
-                        "description": "Duplicated",
+                        "description": "Duplicated Team",
                         "content": {
                             "text/plain": {
                                 "schema": {
@@ -953,7 +953,7 @@
                                 },
                                 "examples": {
                                     "Error": {
-                                        "value": "Duplicated User"
+                                        "value": "Duplicated Team"
                                     }
                                 }
                             }
@@ -1060,7 +1060,7 @@
                 }]
             },
             "delete": {
-                "description": "delete one Team",
+                "description": "Delete one Team",
                 "tags": ["team"],
                 "parameters": [
                     {
@@ -1139,13 +1139,13 @@
                 }]
             },
             "put": {
-                "description": "update one Team",
+                "description": "Update one Team",
                 "tags": ["team"],
                 "parameters": [
                     {
                       "name": "id",
                       "in": "path",
-                      "description": "ID of worker to use",
+                      "description": "ID of team to use",
                       "required": true,
                       "schema": {
                         "type": "string"
@@ -1158,7 +1158,7 @@
                                 "$ref": "#components/schemas/Team"
                             },
                             "examples": {
-                                "Worker": {
+                                "Team": {
                                     "value": {
                                         "title":"grupo1"
                                     }
@@ -1242,7 +1242,7 @@
         },
         "/teams/{id}/addWorker": {
             "put": {
-                "description": "add one worker to Team",
+                "description": "Add one worker to Team",
                 "tags": ["team"],
                 "parameters": [
                     {
@@ -1408,14 +1408,14 @@
                                 },
                                 "examples": {
                                     "Unauthorized": {
-                                        "value": "Not Authorized ^^"
+                                        "value": "Not Authorized"
                                     }
                                 }
                             }
                         }
                     },
                     "406": {
-                        "description": "Duplicated",
+                        "description": "Duplicated Task",
                         "content": {
                             "text/plain": {
                                 "schema": {
@@ -1435,7 +1435,7 @@
                 }]
             },
             "get": {
-                "description": "get all Task",
+                "description": "Get all tasks",
                 "tags": ["task"],
                 "responses": {
                     "200": {
@@ -1490,7 +1490,7 @@
                                 },
                                 "examples": {
                                     "Unauthorized": {
-                                        "value": "Not Authorized ^^"
+                                        "value": "Not Authorized"
                                     }
                                 }
                             }
@@ -1573,7 +1573,7 @@
                         }
                     },
                     "404": {
-                        "description": "Error",
+                        "description": "Not found",
                         "content": {
                             "text/plain": {
                                 "schema": {
@@ -1593,7 +1593,7 @@
                 }]
             },
             "delete": {
-                "description": "delete one Task",
+                "description": "Delete one Task",
                 "tags": ["task"],
                 "parameters": [
                     {
@@ -1672,7 +1672,7 @@
                 }]
             },
             "put": {
-                "description": "update one Task",
+                "description": "Update one Task",
                 "tags": ["task"],
                 "parameters": [
                     {
@@ -1691,7 +1691,7 @@
                                 "$ref": "#components/schemas/Task"
                             },
                             "examples": {
-                                "Worker": {
+                                "Task": {
                                     "value": {
                                         "title":"tarefa 5"
                                     }
@@ -1798,7 +1798,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Success",
+                        "description": "Project created",
                         "content": {
                             "text/plain": {
                                 "schema": {
@@ -1836,14 +1836,14 @@
                                 },
                                 "examples": {
                                     "Unauthorized": {
-                                        "value": "Not Authorized ^^"
+                                        "value": "Not Authorized"
                                     }
                                 }
                             }
                         }
                     },
                     "406": {
-                        "description": "Duplicated",
+                        "description": "Duplicated task",
                         "content": {
                             "text/plain": {
                                 "schema": {
@@ -1863,7 +1863,7 @@
                 }]
             },
             "get": {
-                "description": "get all Projects",
+                "description": "Get all Projects",
                 "tags": ["project"],
                 "responses": {
                     "200": {
@@ -1924,7 +1924,7 @@
                                 },
                                 "examples": {
                                     "Unauthorized": {
-                                        "value": "Not Authorized ^^"
+                                        "value": "Not Authorized"
                                     }
                                 }
                             }
@@ -1944,7 +1944,7 @@
                     {
                       "name": "id",
                       "in": "path",
-                      "description": "ID of task to use",
+                      "description": "ID of project to use",
                       "required": true,
                       "schema": {
                         "type": "string"
@@ -2007,7 +2007,7 @@
                         }
                     },
                     "404": {
-                        "description": "Error",
+                        "description": "Not found",
                         "content": {
                             "text/plain": {
                                 "schema": {
@@ -2027,7 +2027,7 @@
                 }]
             },
             "delete": {
-                "description": "delete one Project",
+                "description": "Delete one Project",
                 "tags": ["project"],
                 "parameters": [
                     {
@@ -2106,7 +2106,7 @@
                 }]
             },
             "put": {
-                "description": "update one Task",
+                "description": "Update one project",
                 "tags": ["project"],
                 "parameters": [
                     {
@@ -2125,7 +2125,7 @@
                                 "$ref": "#components/schemas/Project"
                             },
                             "examples": {
-                                "Worker": {
+                                "Project": {
                                     "value": {
                                         "title":"projeto 2"
                                     }
@@ -2136,14 +2136,14 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Task update",
+                        "description": "Project update",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#components/schemas/Project"
                                 },
                                 "examples": {
-                                    "Task changes": 
+                                    "Project changes": 
                                         {
                                             "title": "projeto 2"
                                         }
@@ -2209,7 +2209,7 @@
         },
         "/projects/{id}/addWorker": {
             "put": {
-                "description": "add one worker to project",
+                "description": "Add one worker to project",
                 "tags": ["project"],
                 "parameters": [
                     {
@@ -2228,7 +2228,7 @@
                                 "$ref": "#components/schemas/Project"
                             },
                             "examples": {
-                                "Worker": {
+                                "Project": {
                                     "value": {
                                         "worker_id":"78t2gyu9013"
                                     }
@@ -2313,7 +2313,7 @@
 
         "/clients": {
             "post": {
-                "description": "Create cliente",
+                "description": "Create client",
                 "tags": ["client"],
                 "requestBody": {
                     "content": {
@@ -2322,7 +2322,7 @@
                                 "$ref": "#components/schemas/Client"
                             },
                             "examples": {
-                                "Project": {
+                                "Client": {
                                     "value": {
                                         "name":"cliente  1",
                                         "contact": "987654321",
@@ -2344,7 +2344,7 @@
                             },
                             "examples": {
                                 "Success": {
-                                    "value": "Project Created"
+                                    "value": "Client Created"
                                 }
                             }
                         }
@@ -2373,14 +2373,14 @@
                                 },
                                 "examples": {
                                     "Unauthorized": {
-                                        "value": "Not Authorized ^^"
+                                        "value": "Not Authorized"
                                     }
                                 }
                             }
                         }
                     },
                     "406": {
-                        "description": "Duplicated",
+                        "description": "Duplicated Client",
                         "content": {
                             "text/plain": {
                                 "schema": {
@@ -2388,7 +2388,7 @@
                                 },
                                 "examples": {
                                     "Error": {
-                                        "value": "Duplicated Task"
+                                        "value": "Duplicated client"
                                     }
                                 }
                             }
@@ -2400,7 +2400,7 @@
                 }]
             },
             "get": {
-                "description": "get all Clients",
+                "description": "Get all Clients",
                 "tags": ["client"],
                 "responses": {
                     "200": {
@@ -2453,7 +2453,7 @@
                                 },
                                 "examples": {
                                     "Unauthorized": {
-                                        "value": "Not Authorized ^^"
+                                        "value": "Not Authorized"
                                     }
                                 }
                             }
@@ -2535,7 +2535,7 @@
                         }
                     },
                     "404": {
-                        "description": "Error",
+                        "description": "Not found",
                         "content": {
                             "text/plain": {
                                 "schema": {
@@ -2555,7 +2555,7 @@
                 }]
             },
             "delete": {
-                "description": "delete one Client",
+                "description": "Delete one Client",
                 "tags": ["client"],
                 "parameters": [
                     {
@@ -2634,7 +2634,7 @@
                 }]
             },
             "put": {
-                "description": "update one client",
+                "description": "Update one client",
                 "tags": ["client"],
                 "parameters": [
                     {
@@ -2653,7 +2653,7 @@
                                 "$ref": "#components/schemas/Client"
                             },
                             "examples": {
-                                "Worker": {
+                                "Client info": {
                                     "value": {
                                         "title":"client 2"
                                     }
@@ -2738,7 +2738,7 @@
 
         "/badges": {
             "get": {
-                "description": "get all badges",
+                "description": "Get all badges",
                 "tags": ["badge"],
                 "responses": {
                     "200": {
@@ -2795,7 +2795,7 @@
                                 },
                                 "examples": {
                                     "Unauthorized": {
-                                        "value": "Not Authorized ^^"
+                                        "value": "Not Authorized"
                                     }
                                 }
                             }
@@ -2816,7 +2816,7 @@
                                 "$ref": "#components/schemas/Badge"
                             },
                             "examples": {
-                                "Team": {
+                                "Badge": {
                                     "value": {
                                         "name":"badge1",
                                         "image": "URL/2",
@@ -2831,7 +2831,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Success",
+                        "description": "Badge created",
                         "content": {
                             "text/plain": {
                                 "schema": {
@@ -2869,14 +2869,14 @@
                                 },
                                 "examples": {
                                     "Unauthorized": {
-                                        "value": "Not Authorized ^^"
+                                        "value": "Not Authorized"
                                     }
                                 }
                             }
                         }
                     },
                     "406": {
-                        "description": "Duplicated",
+                        "description": "Duplicated badge",
                         "content": {
                             "text/plain": {
                                 "schema": {
@@ -2968,7 +2968,7 @@
                         }
                     },
                     "404": {
-                        "description": "Error",
+                        "description": "Not found",
                         "content": {
                             "text/plain": {
                                 "schema": {
@@ -2988,7 +2988,7 @@
                 }]
             },
             "delete": {
-                "description": "delete one Badge",
+                "description": "Delete one Badge",
                 "tags": ["badge"],
                 "parameters": [
                     {
