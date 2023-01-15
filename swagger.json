@@ -681,6 +681,109 @@
                 }]
             }
         },
+        "/workers/{id}/addBadge": {
+            "put": {
+                "description": "add one badge to worker",
+                "tags": ["workers"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of project to use",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "requestBody": {
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "$ref": "#components/schemas/Project"
+                            },
+                            "examples": {
+                                "Badge": {
+                                    "value": {
+                                        "badge_id":"78t2gyu9013"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Project update",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Project"
+                                },
+                                "examples": {
+                                    "Worker added": 
+                                        {
+                                            "title": "grupo3"
+                                        }
+                                }
+                            },
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            }
+        },
 
         "/teams/create": {
             "post": {
@@ -2043,6 +2146,109 @@
                                     "Task changes": 
                                         {
                                             "title": "projeto 2"
+                                        }
+                                }
+                            },
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            }
+        },
+        "/projects/{id}/addWorker": {
+            "put": {
+                "description": "add one worker to project",
+                "tags": ["project"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of project to use",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "requestBody": {
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "$ref": "#components/schemas/Project"
+                            },
+                            "examples": {
+                                "Worker": {
+                                    "value": {
+                                        "worker_id":"78t2gyu9013"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Project update",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Project"
+                                },
+                                "examples": {
+                                    "Worker added": 
+                                        {
+                                            "title": "grupo3"
                                         }
                                 }
                             },

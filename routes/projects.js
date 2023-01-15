@@ -23,4 +23,8 @@ router.delete('/:id', (req, res) => {
     controller.deleteProject(req, res)
 })
 
+router.put('/:id/addWorker', (req, res) => {
+    controller.addWorker(req, res)
+})
+
 module.exports = router

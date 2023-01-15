@@ -50,24 +50,13 @@ const createTeam = (req, res) => {
 }
 
 const addWorker = (req, res) => {
-    team.findByIdAndUpdate(req.params.id, req.body).then((result) => {
-        if (result) {
-            res.status(200).send(`team id:${req.params.id}: change made successfully`);
+    team.findByIdAndUpdate(req.params.id, 
+        {
+        $push: { 
+            workers : {
+                worker_id: req.body.worker_id
+            }
         }
-        else {
-            res.status(404).send('team not found')
-        }
-    }).catch((error) => {
-        res.status(400).send(error);
-    })
-}; 
-
-const updateTeam = (req, res) => {
-    team.updateOne({_id: req.params.id}, {
-        $addToSet: {
-            workers: [
-                req.body.worker_id
-            ]}
     }).then((result) => {
         if (result) {
             res.status(200).send(`team id:${req.params.id}: change made successfully`);
@@ -79,6 +68,19 @@ const updateTeam = (req, res) => {
         res.status(400).send(error);
     })
 }
+
+const updateTeam = (req, res) => {
+    team.findByIdAndUpdate(req.params.id, req.body).then((result) => {
+        if (result) {
+            res.status(200).send(`team id:${req.params.id}: change made successfully`);
+        }
+        else {
+            res.status(404).send('team not found')
+        }
+    }).catch((error) => {
+        res.status(400).send(error);
+    })
+};
 
 const deleteTeam = (req, res) => {
     team.findByIdAndDelete(req.params.id).then((result) => {

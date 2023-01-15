@@ -106,7 +106,28 @@ const deleteWorker = (req, res) => {
     })
 }
 
+const addBadge = (req, res) => {
+    worker.findByIdAndUpdate(req.params.id, 
+        {
+        $push: { 
+            badges : {
+                badge_id: req.body.badge_id
+            }
+        }
+    }).then((result) => {
+        if (result) {
+            res.status(200).send(`team id:${req.params.id}: change made successfully`);
+        }
+        else {
+            res.status(404).send('team not found')
+        }
+    }).catch((error) => {
+        res.status(400).send(error);
+    })
+}
+
 exports.login = login; 
+exports.addBadge = addBadge;
 exports.getAllWorkers = getAllWorkers;
 exports.getOneWorker = getOneWorker;
 exports.updateWorker = updateWorker;
