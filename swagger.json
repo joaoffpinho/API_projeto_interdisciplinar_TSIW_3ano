@@ -784,6 +784,110 @@
                 }]
             }
         },
+        "/workers/{id}/removeBadge": {
+            "put": {
+                "description": "Remove one badge to worker",
+                "tags": ["workers"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of badge to use",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "requestBody": {
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "$ref": "#components/schemas/Worker"
+                            },
+                            "examples": {
+                                "Badge": {
+                                    "value": {
+                                        "badge_id":"78t2gyu9013"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Worker updated",
+                        "content": {
+                            "application/json": {
+                                "text/plain": {
+                                    "schema": {
+                                        "type": "string"
+                                    },
+                                    "examples": {
+                                        "Success": {
+                                            "value": "Worker updated"
+                                        }
+                                    }
+                                }
+                            },
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            }
+        },
 
         "/teams/create": {
             "post": {
@@ -1272,22 +1376,113 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Team update",
+                        "description": "Team updated",
                         "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#components/schemas/Team"
-                                },
-                                "examples": {
-                                    "Team changes": 
-                                        {
-                                            "title": "grupo3"
-                                        }
-                                }
-                            },
                             "text/plain": {
                                 "schema": {
                                     "type": "string"
+                                },
+                                "examples": {
+                                    "Success": {
+                                        "value": "Team updated"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            }
+        },
+        "/teams/{id}/removeWorker": {
+            "put": {
+                "description": "Add one worker to Team",
+                "tags": ["team"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of team to use",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "requestBody": {
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "$ref": "#components/schemas/Team"
+                            },
+                            "examples": {
+                                "Worker": {
+                                    "value": {
+                                        "worker_id":"78t2gyu9013"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Team updated",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Success": {
+                                        "value": "Team updated"
+                                    }
                                 }
                             }
                         }
@@ -2255,6 +2450,103 @@
                             "text/plain": {
                                 "schema": {
                                     "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not Authorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            }
+        },
+        "/projects/{id}/removeWorker": {
+            "put": {
+                "description": "Add one worker to project",
+                "tags": ["project"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ID of project to use",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }],
+                "requestBody": {
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "$ref": "#components/schemas/Project"
+                            },
+                            "examples": {
+                                "Project": {
+                                    "value": {
+                                        "worker_id":"78t2gyu9013"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Project updated",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Success": {
+                                        "value": "Project updated"
+                                    }
                                 }
                             }
                         }

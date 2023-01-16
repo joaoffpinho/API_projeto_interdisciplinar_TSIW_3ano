@@ -69,6 +69,26 @@ const addWorker = (req, res) => {
     })
 }
 
+const removeWorker = (req, res) => {
+    team.findByIdAndUpdate(req.params.id, 
+        {
+        $pull: { 
+            workers : {
+                worker_id: req.body.worker_id
+            }
+        }
+    }).then((result) => {
+        if (result) {
+            res.status(200).send(`team id:${req.params.id}: change made successfully`);
+        }
+        else {
+            res.status(404).send('team not found')
+        }
+    }).catch((error) => {
+        res.status(400).send(error);
+    })
+}
+
 const updateTeam = (req, res) => {
     team.findByIdAndUpdate(req.params.id, req.body).then((result) => {
         if (result) {
@@ -96,6 +116,7 @@ const deleteTeam = (req, res) => {
 
 exports.getAllTeams = getAllTeams;
 exports.addWorker = addWorker;
+exports.removeWorker = removeWorker;
 exports.getOneTeam = getOneTeam;
 exports.createTeam = createTeam;
 exports.deleteTeam = deleteTeam;

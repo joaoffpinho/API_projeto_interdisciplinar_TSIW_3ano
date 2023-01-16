@@ -97,8 +97,29 @@ const addWorker = (req, res) => {
     })
 }
 
+const removeWorker = (req, res) => {
+    project.findByIdAndUpdate(req.params.id, 
+        {
+        $push: { 
+            workers : {
+                worker_id: req.body.worker_id
+            }
+        }
+    }).then((result) => {
+        if (result) {
+            res.status(200).send(`project id:${req.params.id}: change made successfully`);
+        }
+        else {
+            res.status(404).send('Project not found')
+        }
+    }).catch((error) => {
+        res.status(400).send(error);
+    })
+}
+
 exports.getAllProjects = getAllProjects; 
 exports.addWorker = addWorker;
+exports.removeWorker = removeWorker;
 exports.getOneProject = getOneProject; 
 exports.createProject = createProject;
 exports.updateProject = updateProject;

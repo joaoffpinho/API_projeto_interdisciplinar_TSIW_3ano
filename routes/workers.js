@@ -32,6 +32,10 @@ router.put('/:id/addbadge', (req, res) => {
     controller.addBadge(req, res)
 })
 
+router.put('/:id/removebadge', (req, res) => {
+    controller.removeBadge(req, res)
+})
+
 // router.post('/:id/badges/:id', (req, res) => {
 //     controller.giveBadge(req, res)
 // })
