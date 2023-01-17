@@ -50,14 +50,8 @@ const createTeam = (req, res) => {
 }
 
 const addWorker = (req, res) => {
-    team.findByIdAndUpdate(req.params.id, 
-        {
-        $push: { 
-            workers : {
-                worker_id: req.body.worker_id
-            }
-        }
-    }).then((result) => {
+    team.findOneAndUpdate(req.params.id, { $addToSet: { workers: req.body.worker_id}},{new: true})
+    .then((result) => {
         if (result) {
             res.status(200).send(`team id:${req.params.id}: change made successfully`);
         }
@@ -70,14 +64,7 @@ const addWorker = (req, res) => {
 }
 
 const removeWorker = (req, res) => {
-    team.findByIdAndUpdate(req.params.id, 
-        {
-        $pull: { 
-            workers : {
-                worker_id: req.body.worker_id
-            }
-        }
-    }).then((result) => {
+    team.findByIdAndUpdate(req.params.id, { $pull: { workers : req.body.worker_id}}).then((result) => {
         if (result) {
             res.status(200).send(`team id:${req.params.id}: change made successfully`);
         }

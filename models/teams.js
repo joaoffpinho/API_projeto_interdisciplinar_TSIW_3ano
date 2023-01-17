@@ -10,9 +10,7 @@ const teamSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    workers: [{
-        worker_id: String
-    }],
+    workers: [String],
     desc: {
         type: String
     }

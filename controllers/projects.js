@@ -78,14 +78,7 @@ const deleteProject = (req, res) => {
 }
 
 const addWorker = (req, res) => {
-    project.findByIdAndUpdate(req.params.id, 
-        {
-        $push: { 
-            workers : {
-                worker_id: req.body.worker_id
-            }
-        }
-    }).then((result) => {
+    project.findByIdAndUpdate(req.params.id, {$push: { workers: req.body.worker_id}}).then((result) => {
         if (result) {
             res.status(200).send(`project id:${req.params.id}: change made successfully`);
         }
@@ -98,14 +91,7 @@ const addWorker = (req, res) => {
 }
 
 const removeWorker = (req, res) => {
-    project.findByIdAndUpdate(req.params.id, 
-        {
-        $push: { 
-            workers : {
-                worker_id: req.body.worker_id
-            }
-        }
-    }).then((result) => {
+    project.findByIdAndUpdate(req.params.id, {$pull: { workers : req.body.worker_id}}).then((result) => {
         if (result) {
             res.status(200).send(`project id:${req.params.id}: change made successfully`);
         }

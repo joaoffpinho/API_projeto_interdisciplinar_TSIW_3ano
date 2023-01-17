@@ -107,14 +107,7 @@ const deleteWorker = (req, res) => {
 }
 
 const addBadge = (req, res) => {
-    worker.findByIdAndUpdate(req.params.id, 
-        {
-        $push: { 
-            badges : {
-                badge_id: req.body.badge_id
-            }
-        }
-    }).then((result) => {
+    worker.findByIdAndUpdate(req.params.id, { $push: { badges : req.body.badge_id}}).then((result) => {
         if (result) {
             res.status(200).send(`team id:${req.params.id}: change made successfully`);
         }
@@ -127,14 +120,7 @@ const addBadge = (req, res) => {
 }
 
 const removeBadge = (req, res) => {
-    worker.findByIdAndUpdate(req.params.id, 
-        {
-        $pull: { 
-            badges : {
-                badge_id: req.body.badge_id
-            }
-        }
-    }).then((result) => {
+    worker.findByIdAndUpdate(req.params.id, {$pull: { badges : { badge_id: req.body.badge_id}}}).then((result) => {
         if (result) {
             res.status(200).send(`team id:${req.params.id}: change made successfully`);
         }

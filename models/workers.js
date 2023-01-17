@@ -33,9 +33,7 @@ const workerSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    badges: [{
-        badge_id: String
-    }],
+    badges: [String],
 });
 
 const worker = mongoose.model('tbl_workers', workerSchema);
