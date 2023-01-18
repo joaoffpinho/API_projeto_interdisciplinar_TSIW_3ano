@@ -1,5 +1,6 @@
 const utilities = require('../utilities/utilities')
 const project = require("../models/projects");
+const worker = require("../models/workers");
 const bcrypt = require('bcrypt');
 
 const getAllProjects = (req, res) => {
@@ -103,7 +104,32 @@ const removeWorker = (req, res) => {
     })
 }
 
-exports.getAllProjects = getAllProjects; 
+const getSomeWorkers = (req, res) => {
+    project.findById(req.params.id).select('workers')
+    .then((result) => {
+        if (result) {
+            worker.find({
+                _id: {
+                    $in: result.workers
+                }}).then((workers) => {
+                if(workers) {
+                    res.status(200).json(workers);
+                } else {
+                    res.status(404).send('not found')
+                }
+            }).catch((err) => {
+                res.status(400).send('error')
+            })
+        } else {
+            res.status(404).send('not found')
+        }
+    }).catch((err) => {
+        res.status(400).send('error')
+    })
+}
+
+exports.getAllProjects = getAllProjects;
+exports.getSomeWorkers = getSomeWorkers; 
 exports.addWorker = addWorker;
 exports.removeWorker = removeWorker;
 exports.getOneProject = getOneProject; 

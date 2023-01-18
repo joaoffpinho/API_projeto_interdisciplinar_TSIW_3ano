@@ -5,20 +5,23 @@ const {validationResult, body} = require('express-validator')
 
 router.post('/login', (req, res) => {
     controller.login(req, res);
-})//done
+})
 
-//testing
 router.post('/register', (req, res) => {
     controller.register(req, res);
-})//done
+})
 
 router.get('/getAll', ( req, res) => {
     controller.getAllWorkers(req,res);
-})//done
+})
+
+router.get('/getSome', ( req, res) => {
+    controller.getSomeWorkers(req,res);
+})
 
 router.get('/:id', ( req, res) => {
     controller.getOneWorker(req,res);
-})//done
+})
 
 router.put('/:id/update', (req, res) => {
     controller.updateWorker(req, res)
@@ -36,17 +39,8 @@ router.put('/:id/removebadge', (req, res) => {
     controller.removeBadge(req, res)
 })
 
-// router.post('/:id/badges/:id', (req, res) => {
-//     controller.giveBadge(req, res)
-// })
-
-// router.patch('/:id', (req, res) => {
-//     controller.recoverPassword(req, res)
-// })
-
-
-
-
-
+router.get('/:id/badges', ( req, res) => {
+    controller.getSomeBadges(req,res);
+})
 
 module.exports = router

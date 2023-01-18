@@ -1,4 +1,5 @@
 const team = require("../models/teams");
+const worker = require("../models/workers")
 
 const getAllTeams= (req, res) => {
     team.find().then((result) => {
@@ -50,7 +51,8 @@ const createTeam = (req, res) => {
 }
 
 const addWorker = (req, res) => {
-    team.findOneAndUpdate(req.params.id, { $addToSet: { workers: req.body.worker_id}},{new: true})
+    team.findOneAndUpdate(req.params.id, { $addToSet: { 
+        workers: req.body.worker_id}},{new: true})
     .then((result) => {
         if (result) {
             res.status(200).send(`team id:${req.params.id}: change made successfully`);
@@ -74,6 +76,32 @@ const removeWorker = (req, res) => {
     }).catch((error) => {
         res.status(400).send(error);
     })
+}
+
+const getSomeWorkers = (req, res) => {
+    team.findById(req.params.id).select('workers')
+    .then((result) => {
+        if (result) {
+            worker.find({
+                _id: {
+                    $in: result.workers
+                }}).then((workers) => {
+                if(workers) {
+                    res.status(200).json(workers);
+                } else {
+                    res.status(404).send('not found')
+                }
+            }).catch((err) => {
+                res.status(400).send('error')
+            })
+        } else {
+            res.status(404).send('not found')
+        }
+    }).catch((err) => {
+        res.status(400).send('error')
+    })
+
+
 }
 
 const updateTeam = (req, res) => {
@@ -102,6 +130,7 @@ const deleteTeam = (req, res) => {
 }
 
 exports.getAllTeams = getAllTeams;
+exports.getSomeWorkers = getSomeWorkers;
 exports.addWorker = addWorker;
 exports.removeWorker = removeWorker;
 exports.getOneTeam = getOneTeam;
