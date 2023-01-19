@@ -670,7 +670,7 @@
                     {
                       "name": "id",
                       "in": "path",
-                      "description": "ID of badge to use",
+                      "description": "ID of worker to use",
                       "required": true,
                       "schema": {
                         "type": "string"
@@ -694,7 +694,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Worker updated",
+                        "description": "Badge added",
                         "content": {
                             "application/json": {
                                 "text/plain": {
@@ -703,7 +703,7 @@
                                     },
                                     "examples": {
                                         "Success": {
-                                            "value": "Worker updated"
+                                            "value": "Badge added"
                                         }
                                     }
                                 }
@@ -768,13 +768,13 @@
         },
         "/workers/{id}/removeBadge": {
             "put": {
-                "description": "Remove one badge to worker",
+                "description": "Remove one badge if the worker",
                 "tags": ["workers"],
                 "parameters": [
                     {
                       "name": "id",
                       "in": "path",
-                      "description": "ID of badge to use",
+                      "description": "ID of worker to use",
                       "required": true,
                       "schema": {
                         "type": "string"
@@ -798,7 +798,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Worker updated",
+                        "description": "Badge removed",
                         "content": {
                             "application/json": {
                                 "text/plain": {
@@ -807,7 +807,7 @@
                                     },
                                     "examples": {
                                         "Success": {
-                                            "value": "Worker updated"
+                                            "value": "Badge removed"
                                         }
                                     }
                                 }
@@ -886,22 +886,31 @@
                     }],
                 "responses": {
                     "200": {
-                        "description": "Project info",
+                        "description": "Badge list",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#components/schemas/Worker"
                                 },
                                 "examples": {
-                                    "Worker List": 
-                                        {
-                                            "_id": "5fac346470a04c174c2e121f",
-                                            "name": "Grupo1",
-                                            "manager_id": "63b96a15adfdee5320021052",
-                                            "client_id": "63b96a15adfdee5320021053",
-                                            "badges": [ "63b96a15adfdee55467892", "63b96a15adfdee55467892"],
-                                            "desc": "testing"
-                                        }
+                                    "Badge List": [
+                                    {
+                                        "_id": "5fac346470a04c174c2e121f",
+                                        "name": "badge 1",
+                                        "image": "url",
+                                        "reqPoints": 10,
+                                        "requisits": "hour",
+                                        "rewardPoints": 10
+                                    },
+                                    {
+                                        "_id": "5fac346470a04c174c2e121f",
+                                        "name": "badge 1",
+                                        "image": "url",
+                                        "reqPoints": 10,
+                                        "requisits": "task",
+                                        "rewardPoints": 10
+                                    }
+                                ]
                                 }
                             },
                             "text/plain": {
@@ -962,7 +971,6 @@
                 }]
             }
         },
-
         "/teams/create": {
             "post": {
                 "description": "Create Team",
@@ -994,7 +1002,7 @@
                                 },
                                 "examples": {
                                     "Success": {
-                                        "value": "Team deleted"
+                                        "value": "Team created"
                                     }
                                 }
                             }
@@ -1347,7 +1355,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Team update",
+                        "description": "Team updated",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1420,7 +1428,7 @@
         },
         "/teams/{id}/addWorker": {
             "put": {
-                "description": "Add one worker to Team",
+                "description": "Add one worker to the team",
                 "tags": ["team"],
                 "parameters": [
                     {
@@ -1450,7 +1458,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Team updated",
+                        "description": "Worker added",
                         "content": {
                             "text/plain": {
                                 "schema": {
@@ -1458,7 +1466,7 @@
                                 },
                                 "examples": {
                                     "Success": {
-                                        "value": "Team updated"
+                                        "value": "Worker added"
                                     }
                                 }
                             }
@@ -1517,7 +1525,7 @@
         },
         "/teams/{id}/removeWorker": {
             "put": {
-                "description": "Add one worker to Team",
+                "description": "Remove one worker from the team",
                 "tags": ["team"],
                 "parameters": [
                     {
@@ -1628,25 +1636,37 @@
                     }],
                 "responses": {
                     "200": {
-                        "description": "Team info",
+                        "description": "Team's workers",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#components/schemas/Team"
                                 },
                                 "examples": {
-                                    "Team List": 
+                                    "Worker List": [
                                         {
                                             "_id": "5fac346470a04c174c2e121f",
-                                            "title": "Grupo1",
-                                            "manager_id": "63b96a15adfdee5320021052",
-                                            "workers": [{
-                                                "id": "63b96a15adfdee55467892"
-                                            },{
-                                                "id": "63b96a15adfdee55467892"
-                                            }],
-                                            "desc": "testing"
+                                            "name": "user",
+                                            "admin": false,
+                                            "password": "5rftft67gyh8j",
+                                            "email": "user@gmail.com",
+                                            "tasksDone": 0,
+                                            "hoursWorked": 0,
+                                            "projectsInvolved": 0,
+                                            "HoursForTheDay": 0
+                                        },
+                                        {
+                                            "_id": "5fac347970a04c174c2e1220",
+                                            "name": "user",
+                                            "admin": false,
+                                            "password": "5rftft67gyh8j",
+                                            "email": "user@gmail.com",
+                                            "tasksDone": 0,
+                                            "hoursWorked": 0,
+                                            "projectsInvolved": 0,
+                                            "HoursForTheDay": 0
                                         }
+                                    ]
                                 }
                             },
                             "text/plain": {
@@ -1707,7 +1727,6 @@
                 }]
             }
         },
-
         "/tasks": {
             "post": {
                 "description": "Create Task",
@@ -2137,7 +2156,6 @@
                 }]
             }
         },
-
         "/projects": {
             "post": {
                 "description": "Create project",
@@ -2245,20 +2263,14 @@
                                         "name": "projeto 1",
                                         "client_id": "63b96a15adfdee5320021052",
                                         "manager_id": "63b96a15adfdee53234052",
-                                        "workers": [{
-                                            "id":"63b96a1512n1no55467892",
-                                            "id":"63b96a15adfdee55467892"
-                                        }]
+                                        "workers": ["63b96a1512n1no55467892","63b96a15adfdee55467892"]
                                     },
                                     {
                                         "_id": "5fac346470a04c174c2e121f",
                                         "name": "projeto 1",
                                         "client_id": "63b96a15adfdee5320021052",
                                         "manager_id": "63b96a15adfdee53234052",
-                                        "workers": [{
-                                            "id":"63b96a1512n1no55467892",
-                                            "id":"63b96a15adfdee55467892"
-                                        }]
+                                        "workers": ["63b96a1512n1no55467892","63b96a15adfdee55467892"]
                                     }
                                 ]
                             }
@@ -2589,10 +2601,10 @@
                     "content": {
                         "application/json" : {
                             "schema": {
-                                "$ref": "#components/schemas/Project"
+                                "$ref": "#components/schemas/Worker"
                             },
                             "examples": {
-                                "Project": {
+                                "Worker": {
                                     "value": {
                                         "worker_id":"78t2gyu9013"
                                     }
@@ -2676,7 +2688,7 @@
         },
         "/projects/{id}/removeWorker": {
             "put": {
-                "description": "Add one worker to project",
+                "description": "Remove one worker to project",
                 "tags": ["project"],
                 "parameters": [
                     {
@@ -2692,10 +2704,10 @@
                     "content": {
                         "application/json" : {
                             "schema": {
-                                "$ref": "#components/schemas/Project"
+                                "$ref": "#components/schemas/Worker"
                             },
                             "examples": {
-                                "Project": {
+                                "Worker": {
                                     "value": {
                                         "worker_id":"78t2gyu9013"
                                     }
@@ -2794,15 +2806,30 @@
                                     "$ref": "#components/schemas/Project"
                                 },
                                 "examples": {
-                                    "Project List": 
+                                    "Worker List": [
                                         {
                                             "_id": "5fac346470a04c174c2e121f",
-                                            "name": "Grupo1",
-                                            "manager_id": "63b96a15adfdee5320021052",
-                                            "client_id": "63b96a15adfdee5320021053",
-                                            "workers": [ "63b96a15adfdee55467892", "63b96a15adfdee55467892"],
-                                            "desc": "testing"
+                                            "name": "user",
+                                            "admin": false,
+                                            "password": "5rftft67gyh8j",
+                                            "email": "user@gmail.com",
+                                            "tasksDone": 0,
+                                            "hoursWorked": 0,
+                                            "projectsInvolved": 0,
+                                            "HoursForTheDay": 0
+                                        },
+                                        {
+                                            "_id": "5fac347970a04c174c2e1220",
+                                            "name": "user",
+                                            "admin": false,
+                                            "password": "5rftft67gyh8j",
+                                            "email": "user@gmail.com",
+                                            "tasksDone": 0,
+                                            "hoursWorked": 0,
+                                            "projectsInvolved": 0,
+                                            "HoursForTheDay": 0
                                         }
+                                    ]
                                 }
                             },
                             "text/plain": {
@@ -2863,7 +2890,6 @@
                 }]
             }
         },
-
         "/clients": {
             "post": {
                 "description": "Create client",
@@ -3288,7 +3314,6 @@
                 }]
             }
         },
-
         "/badges": {
             "get": {
                 "description": "Get all badges",
