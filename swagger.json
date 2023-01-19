@@ -1729,7 +1729,7 @@
         },
         "/tasks": {
             "post": {
-                "description": "Create Task",
+                "description": "Create Task and update user hours",
                 "tags": ["task"],
                 "requestBody": {
                     "content": {
@@ -2597,7 +2597,7 @@
         },
         "/projects/{id}/addWorker": {
             "put": {
-                "description": "Add one worker to project",
+                "description": "Add one worker to project and update worker",
                 "tags": ["project"],
                 "parameters": [
                     {

@@ -1,4 +1,5 @@
 const task = require("../models/tasks");
+const worker = require("../models/workers");
 
 const getAllUserTasks = (req, res) => {
     task.find({
@@ -40,14 +41,27 @@ const createTask = (req, res) => {
             res.status(400).send(err); 
         }
 
-            taskToCreate.save(function (err, newTask) {
-                if (err) {
-                    res.status(400).send(err); 
+        taskToCreate.save(function (err, newTask) {
+            if (err) {
+                res.status(400).send(err); 
+            }
+            worker.findByIdAndUpdate(
+                req.body.worker_id, 
+                { $inc: { 
+                    hoursWorked: req.body.timeSpent, 
+                    tasksDone: 1 , 
+                    HoursForTheDay: req.body.timeSpent} }).then((result) => {
+                if (result) {
+                    res.status(200).send(`Task registerd`);
                 }
-                res.status(200).json("Registered Task"); 
+                else {
+                    res.status(404).send('worker not found')
+                }
+            }).catch((error) => {
+                res.status(400).send(error);
             })
-        }
-    )
+        })
+    })
 }
 
 const updateTask = (req, res) => {

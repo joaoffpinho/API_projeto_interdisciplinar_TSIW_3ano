@@ -81,7 +81,20 @@ const deleteProject = (req, res) => {
 const addWorker = (req, res) => {
     project.findByIdAndUpdate(req.params.id, {$push: { workers: req.body.worker_id}}).then((result) => {
         if (result) {
-            res.status(200).send(`project id:${req.params.id}: change made successfully`);
+            worker.findByIdAndUpdate(
+                req.body.worker_id, 
+                { $inc: { 
+                    projectsInvolved: 1
+                } }).then((result) => {
+                if (result) {
+                    res.status(200).send(`Worker added successfuly`);
+                }
+                else {
+                    res.status(404).send('worker not found')
+                }
+            }).catch((error) => {
+                res.status(400).send(error);
+            })
         }
         else {
             res.status(404).send('Project not found')

@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose');
 const app = express();
-const port = 3000;
+const port = process.env.PORT  || 3000;
 const workers = require('./routes/workers.js');
 const projects = require('./routes/projects.js');
 const tasks = require('./routes/tasks.js');

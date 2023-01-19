@@ -165,4 +165,4 @@ exports.getSomeBadges = getSomeBadges;
 exports.getOneWorker = getOneWorker;
 exports.updateWorker = updateWorker;
 exports.deleteWorker = deleteWorker;
-exports.register = register; 
+exports.register = register;
