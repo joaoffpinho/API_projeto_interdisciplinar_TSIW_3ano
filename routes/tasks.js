@@ -3,7 +3,7 @@ const router = express.Router();
 const controller = require('../controllers/tasks')
 const {validationResult, body} = require('express-validator')
 
-router.get('/', ( req, res) => {
+router.get('/user/:id', ( req, res) => {
     controller.getAllUserTasks(req,res);
 })
 

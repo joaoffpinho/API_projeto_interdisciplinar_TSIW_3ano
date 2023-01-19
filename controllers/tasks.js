@@ -1,11 +1,8 @@
-const utilities = require('../utilities/utilities')
 const task = require("../models/tasks");
-const bcrypt = require('bcrypt');
-
 
 const getAllUserTasks = (req, res) => {
     task.find({
-        worker: req.body.worker
+        worker_id: req.params.id
     }).then((result) => {
         if(result) {
             res.status(200).json(result);
@@ -43,9 +40,6 @@ const createTask = (req, res) => {
             res.status(400).send(err); 
         }
 
-        if( task.length > 0 ) {
-            res.status(406).send("Duplicated Task"); 
-        } else {
             taskToCreate.save(function (err, newTask) {
                 if (err) {
                     res.status(400).send(err); 
@@ -53,7 +47,7 @@ const createTask = (req, res) => {
                 res.status(200).json("Registered Task"); 
             })
         }
-    })
+    )
 }
 
 const updateTask = (req, res) => {
