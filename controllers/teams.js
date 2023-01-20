@@ -51,8 +51,7 @@ const createTeam = (req, res) => {
 }
 
 const addWorker = (req, res) => {
-    team.findOneAndUpdate(req.params.id, { $addToSet: { 
-        workers: req.body.worker_id}},{new: true})
+    team.findOneAndUpdate(req.params.id, { $addToSet: { workers: req.body.worker_id}},{new: true})
     .then((result) => {
         if (result) {
             res.status(200).send(`team id:${req.params.id}: change made successfully`);
