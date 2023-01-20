@@ -79,7 +79,7 @@ const deleteProject = (req, res) => {
 }
 
 const addWorker = (req, res) => {
-    project.findByIdAndUpdate(req.params.id, {$addToSet: { workers: req.body.worker_id}}).then((result) => {
+    project.findByIdAndUpdate(req.params.id, {$addToSet: { workers: req.body.worker_id}},{new: true}).then((result) => {
         if (result) {
             worker.findByIdAndUpdate(
                 req.body.worker_id, 
