@@ -767,7 +767,7 @@
             }
         },
         "/workers/{id}/removeBadge": {
-            "put": {
+            "delete": {
                 "description": "Remove one badge if the worker",
                 "tags": ["workers"],
                 "parameters": [
@@ -1524,7 +1524,7 @@
             }
         },
         "/teams/{id}/removeWorker": {
-            "put": {
+            "delete": {
                 "description": "Remove one worker from the team",
                 "tags": ["team"],
                 "parameters": [
@@ -2699,7 +2699,7 @@
             }
         },
         "/projects/{id}/removeWorker": {
-            "put": {
+            "delete": {
                 "description": "Remove one worker to project",
                 "tags": ["project"],
                 "parameters": [

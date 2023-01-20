@@ -23,24 +23,24 @@ router.get('/:id', ( req, res) => {
     controller.getOneWorker(req,res);
 })
 
-router.put('/:id/update', (req, res) => {
-    controller.updateWorker(req, res)
+router.get('/:id/badges', ( req, res) => {
+    controller.getSomeBadges(req,res);
 })
 
-router.delete('/:id', (req, res) => {
-    controller.deleteWorker(req, res)
+router.put('/:id/update', (req, res) => {
+    controller.updateWorker(req, res)
 })
 
 router.put('/:id/addbadge', (req, res) => {
     controller.addBadge(req, res)
 })
 
-router.put('/:id/removebadge', (req, res) => {
-    controller.removeBadge(req, res)
+router.delete('/:id', (req, res) => {
+    controller.deleteWorker(req, res)
 })
 
-router.get('/:id/badges', ( req, res) => {
-    controller.getSomeBadges(req,res);
+router.delete('/:id/removebadge', (req, res) => {
+    controller.removeBadge(req, res)
 })
 
 module.exports = router

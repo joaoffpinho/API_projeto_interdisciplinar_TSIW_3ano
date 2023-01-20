@@ -22,7 +22,7 @@ router.put('/:id/addWorker', (req, res) => {
     controller.addWorker(req, res)
 })
 
-router.put('/:id/removeWorker', (req, res) => {
+router.delete('/:id/removeWorker', (req, res) => {
     controller.removeWorker(req, res)
 })
 
