@@ -16,20 +16,20 @@ const swaggerDocument = require("./swagger.json");
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {explorer: true}));
 
 
-const auth = function(req, res, next) {
-    let exceptions = ['/api-docs', '/workers/register', '/workers/login'];
-    if(exceptions.indexOf(req.url) >= 0) {
-        next();
-    } else {
-        utilities.validateToken(req.headers.authorization, (result) => {
-            if(result) {
-                next();
-            } else {
-                res.status(401).send("Invalid Token");
-            }
-        })
-    }
-}
+// const auth = function(req, res, next) {
+//     let exceptions = ['/api-docs', '/workers/register', '/workers/login','/workers/getAll'];
+//     if(exceptions.indexOf(req.url) >= 0) {
+//         next();
+//     } else {
+//         utilities.validateToken(req.headers.authorization, (result) => {
+//             if(result) {
+//                 next();
+//             } else {
+//                 res.status(401).send("Invalid Token");
+//             }
+//         })
+//     }
+// }
 
 app.use(express.json());
 app.use(auth);
