@@ -9,6 +9,7 @@ const badges = require('./routes/badges.js');
 const teams = require('./routes/teams.js');
 const clients = require('./routes/clients.js');
 const utilities = require('./utilities/utilities.js');
+const cors = require("cors");
 
 /* documentação swagger */
 const swaggerUi = require("swagger-ui-express");
@@ -33,6 +34,7 @@ const auth = function(req, res, next) {
 
 app.use(express.json());
 // app.use(auth);
+app.use(cors());
 app.use('/workers', workers);
 app.use('/projects', projects);
 app.use('/tasks', tasks);
